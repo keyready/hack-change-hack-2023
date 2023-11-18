@@ -1,0 +1,16 @@
+.Navbar {
+    width: 100%;
+    height: var(--navbar-heigth);
+    padding: 20px;
+    background: var(--card-bg);
+}
+
+.gigachat {
+    * {
+        margin: 0 !important;
+        color: transparent !important;
+        -webkit-background-clip: text !important;
+        background-clip: text !important;
+        background-image: linear-gradient(var(--primary-gradient)) !important;
+    }
+}

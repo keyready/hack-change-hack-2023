@@ -1,0 +1,80 @@
+.center {
+    .text, .title {
+        text-align: center;
+    }
+}
+
+.left {
+    .text, .title {
+        text-align: left;
+    }
+}
+
+.right {
+    .text, .title {
+        text-align: right;
+    }
+}
+
+.justify {
+    .text {
+        text-align: justify;
+    }
+}
+
+.large {
+    h1 {
+        margin: 20px 0 0;
+        color: var(--primary-color);
+        font: var(--font-xl);
+        font-weight: bold;
+    }
+
+    p {
+        margin: 5px 0;
+        color: var(--secondary-color);
+        font: var(--font-m);
+        text-indent: 20px;
+    }
+}
+
+.medium {
+    h2 {
+        margin: 20px 0 0;
+        color: transparent !important;
+        font: var(--font-l);
+        font-weight: bold;
+        -webkit-background-clip: text !important;
+        background-clip: text !important;
+        background-image: linear-gradient(var(--primary-gradient)) !important;
+    }
+
+    p {
+        margin: 5px 0;
+        color: var(--secondary-color);
+        font: var(--font-s);
+        text-indent: 20px;
+    }
+}
+
+.small {
+    h3 {
+        margin: 20px 0 0;
+        color: var(--primary-color);
+        font: var(--font-m);
+        font-weight: bold;
+    }
+
+    p {
+        margin: 5px 0;
+        color: var(--secondary-color);
+        font: var(--font-xs);
+        text-indent: 20px;
+    }
+}
+
+.error {
+    .text, .title {
+        color: red;
+    }
+}
