@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	usertypes "server/framework/types/UserTypes"
+	errorutils "server/framework/utils/ErrorUtils"
 	userutils "server/framework/utils/UserUtils"
 	"server/models"
 
@@ -16,20 +17,20 @@ func (h handler) RegisterUser(ctx *gin.Context) {
 
 	if err := ctx.ShouldBindJSON(&newUser); err != nil {
 		log.Fatal(err)
-		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		errorutils.Fail(ctx, http.StatusBadRequest, "invalid format body request")
 		return
 	}
 
 	isUserInDb := userutils.CheckUserInDB(newUser.Email, h.DB)
 	if !isUserInDb {
-		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "user already exists"})
+		errorutils.Fail(ctx, http.StatusBadRequest, "user already exists")
 		return
 	}
 
 	hashedPassword, err := userutils.HashPassword(newUser.Password)
 	if err != nil {
 		log.Fatal(err)
-		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		errorutils.Fail(ctx, http.StatusBadRequest, "error password format")
 		return
 	}
 
@@ -37,16 +38,11 @@ func (h handler) RegisterUser(ctx *gin.Context) {
 		Email:    newUser.Email,
 		Password: hashedPassword,
 	}); result.Error != nil {
-		ctx.AbortWithStatusJSON(
-			http.StatusBadRequest,
-			gin.H{"error": result.Error})
+		log.Fatal(result.Error)
+		errorutils.Fail(ctx, http.StatusBadRequest, "error created user db")
+		return
 	}
 
-	ctx.JSON(
-		http.StatusCreated,
-		gin.H{
-			"message": "new user created",
-		},
-	)
-	// return
+	errorutils.Success(ctx, http.StatusCreated, "user created")
+	return
 }

@@ -14,5 +14,8 @@ func UserRoutes(router *gin.Engine, db *gorm.DB) {
 		DB: db,
 	}
 
-	router.POST("/api/register", h.RegisterUser)
+	api := router.Group("/api")
+
+	api.POST("/register", h.RegisterUser)
+	api.POST("/login", h.LoginUser)
 }

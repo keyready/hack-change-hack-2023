@@ -1,6 +1,8 @@
 package userutils
 
 import (
+	"crypto/rand"
+	"encoding/base64"
 	"log"
 	usertypes "server/framework/types/UserTypes"
 	"server/models"
@@ -9,12 +11,12 @@ import (
 	"gorm.io/gorm"
 )
 
-func CheckHashPassowrd(hashPassword string, password string) (string, error) {
+func CheckHashPassowrd(hashPassword string, password string) (bool, error) {
 	if err := bcrypt.CompareHashAndPassword([]byte(hashPassword), []byte(password)); err != nil {
 		log.Fatal(err)
-		return "", err
+		return false, err
 	}
-	return "ok", nil
+	return true, nil
 }
 
 func HashPassword(password string) (string, error) {
@@ -35,12 +37,22 @@ func CheckUserInDB(email string, db *gorm.DB) bool {
 	return true
 }
 
-func GetUser(email string, db *gorm.DB) (any, error) {
+func GetUser(email string, db *gorm.DB) (*models.UserModel, error) {
 	var user models.UserModel
 
 	if result := db.Find(&user, email); result.Error != nil {
 		log.Fatal(result.Error)
 		return nil, result.Error
 	}
-	return user, nil
+	return &user, nil
+}
+
+func GenerateStateParam() string {
+	randomBytes := make([]byte, 15)
+	_, err := rand.Read(randomBytes)
+	if err != nil {
+		return ""
+	}
+	rndString := base64.URLEncoding.EncodeToString(randomBytes)
+	return rndString[:]
 }
