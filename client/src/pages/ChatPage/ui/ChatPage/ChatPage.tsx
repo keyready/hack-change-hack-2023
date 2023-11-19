@@ -3,9 +3,12 @@ import { Page } from 'widgets/Page/Page';
 import { FormEvent, memo, useCallback, useEffect, useState } from 'react';
 import useWebSocket from 'react-use-websocket';
 import { HStack, VStack } from 'shared/UI/Stack';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from 'shared/UI/Button';
 import { Input } from 'shared/UI/Input';
+import { useSelector } from 'react-redux';
+import { getUsername } from 'entities/Chat';
+import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import classes from './ChatPage.module.scss';
 
 interface ChatPageProps {
@@ -13,7 +16,7 @@ interface ChatPageProps {
 }
 
 interface Message {
-    type: 'connection' | 'message';
+    type: 'connection' | 'message' | 'disconnection';
     username: string;
     message: string;
     room: string;
@@ -27,7 +30,9 @@ const ChatPage = memo((props: ChatPageProps) => {
         document.title = 'ChatPage';
     }, []);
 
+    const username = useSelector(getUsername);
     const { roomId } = useParams<string>();
+
     const [socketUrl] = useState('ws://localhost:5000');
 
     const [messages, setMessages] = useState<Message[]>([]);
@@ -39,7 +44,7 @@ const ChatPage = memo((props: ChatPageProps) => {
         if (message !== null) {
             const data = JSON.parse(message.data) as Message;
 
-            if (data.type === 'message' && data.room === roomId) {
+            if (data.room === roomId) {
                 setMessages((prevState) => [data, ...prevState]);
             }
         }
@@ -52,14 +57,14 @@ const ChatPage = memo((props: ChatPageProps) => {
             const message = JSON.stringify({
                 type: 'message',
                 room: roomId,
-                username: 'user',
+                username,
                 message: newMessage,
                 createdAt: new Date(),
             });
             sendMessage(message);
             setNewMessage('');
         },
-        [newMessage, roomId, sendMessage],
+        [newMessage, roomId, sendMessage, username],
     );
 
     return (
@@ -77,7 +82,14 @@ const ChatPage = memo((props: ChatPageProps) => {
                 <VStack maxW gap="32">
                     {messages.length &&
                         messages.map((message, index) => (
-                            <div key={index} className={classes.messageCard}>
+                            <div
+                                key={index}
+                                className={classNames(classes.messageCard, {
+                                    [classes.ownMessage]: username === message.username,
+                                    [classes.connected]: message.type === 'connection',
+                                    [classes.disconnected]: message.type === 'disconnection',
+                                })}
+                            >
                                 <HStack maxW justify="between">
                                     <p>
                                         {message.username}@ {message.message}

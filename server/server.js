@@ -15,15 +15,15 @@ app.ws('/', (ws, req) => {
     ws.on('message', (event) => {
         const message = JSON.parse(event);
 
-        console.log(message);
-
         switch (message.type) {
             case 'connection':
                 broadcastMessaging(
                     JSON.stringify({
-                        username: message.username,
+                        room: message.room,
+                        username: 'system',
                         type: 'connection',
                         message: `Пользователь ${message.username} подключился`,
+                        createdAt: new Date(),
                     }),
                 );
                 break;
@@ -42,12 +42,11 @@ app.ws('/', (ws, req) => {
         }
     });
 
-    ws.on('close', () => {
-        console.log('WebSocket connection closed');
+    ws.on('close', (event) => {
         broadcastMessaging(
             JSON.stringify({
-                type: 'disconnect',
-                username: 'message.username',
+                type: 'disconnection',
+                username: 'system',
                 message: `Пользователь вышел из чата`,
             }),
         );

@@ -3,10 +3,10 @@ import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { Input } from 'shared/UI/Input';
 import { Button } from 'shared/UI/Button';
 import { VStack } from 'shared/UI/Stack';
-import { classNames } from 'shared/lib/classNames/classNames';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
-import classes from './MainPage.module.scss';
+import { ChatActions } from 'entities/Chat';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 
 const MainPage = () => {
     useEffect(() => {
@@ -14,6 +14,7 @@ const MainPage = () => {
     }, []);
 
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -34,9 +35,10 @@ const MainPage = () => {
                 }),
             );
 
+            dispatch(ChatActions.setUsername(username));
             navigate(`${RoutePath.chat}/${roomId}`);
         },
-        [navigate, password, roomId, socket, username],
+        [dispatch, navigate, password, roomId, socket, username],
     );
 
     return (

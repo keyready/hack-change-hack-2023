@@ -1,6 +1,20 @@
 .messageCard {
-	width: 100%;
-	padding: 20px;
-	outline: 2px solid #82DBF7;
-	border-radius: 10px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    outline: 2px solid #82DBF7;
+}
+
+.ownMessage {
+    background: rgb(130 219 247 / 23%);
+}
+
+.connected {
+    background: rgb(95 252 73 / 42%);
+    text-align: center;
+}
+
+.disconnected {
+    background: rgb(254 12 12 / 42%);
+    text-align: center;
 }

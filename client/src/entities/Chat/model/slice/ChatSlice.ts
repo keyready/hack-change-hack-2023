@@ -1,14 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ChatSchema } from '../types/ChatSchema';
 
 const initialState: ChatSchema = {
-    isLoading: false,
+    username: '',
 };
 
 export const ChatSlice = createSlice({
     name: 'ChatSlice',
     initialState,
-    reducers: {},
+    reducers: {
+        setUsername: (state, action: PayloadAction<string>) => {
+            state.username = action.payload;
+        },
+    },
     // extraReducers: (builder) => {
     //     builder
     //         .addCase(createChat.pending, (state) => {

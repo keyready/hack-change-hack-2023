@@ -32,6 +32,7 @@ export const routerConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.CHAT]: {
         path: `${RoutePath.chat}/:roomId`,
         element: <ChatPage />,
+        authOnly: true,
     },
 
     // last
