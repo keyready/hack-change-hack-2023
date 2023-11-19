@@ -29,4 +29,16 @@ func (h handler) LoginUser(ctx *gin.Context) {
 		return
 	}
 
+	user, err := userutils.GetUser(candidate.Email, h.DB)
+	if err != nil {
+		ctx.AbortWithStatusJSON(http.StatusNotFound, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"user": user,
+	})
+	// return
 }

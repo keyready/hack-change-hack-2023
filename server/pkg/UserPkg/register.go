@@ -48,5 +48,5 @@ func (h handler) RegisterUser(ctx *gin.Context) {
 			"message": "new user created",
 		},
 	)
-	return
+	// return
 }

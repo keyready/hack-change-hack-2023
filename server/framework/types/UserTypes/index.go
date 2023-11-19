@@ -13,3 +13,8 @@ type LoginUser struct {
 	Email    string `json:"number"`
 	Password string `json:"password"`
 }
+
+type ResponseJWT struct {
+	ID   uint   `json:"id"`
+	Role string `json:"role"`
+}

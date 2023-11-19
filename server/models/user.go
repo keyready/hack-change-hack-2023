@@ -24,4 +24,6 @@ type UserModel struct {
 	Job         string    `json:"job"`
 	Experience  int       `json:"experience"`
 	Income      int       `json:"income"`
+
+	Role string `gorm:"default:'user'" json:"role"`
 }

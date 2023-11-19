@@ -3,13 +3,14 @@ package userutils
 import (
 	"log"
 	usertypes "server/framework/types/UserTypes"
+	"server/models"
 
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
 
-func CheckHashPassowrd(hashPassword string) (string, error) {
-	if err := bcrypt.CompareHashAndPassword(); err != nil {
+func CheckHashPassowrd(hashPassword string, password string) (string, error) {
+	if err := bcrypt.CompareHashAndPassword([]byte(hashPassword), []byte(password)); err != nil {
 		log.Fatal(err)
 		return "", err
 	}
@@ -32,4 +33,14 @@ func CheckUserInDB(email string, db *gorm.DB) bool {
 		return false
 	}
 	return true
+}
+
+func GetUser(email string, db *gorm.DB) (any, error) {
+	var user models.UserModel
+
+	if result := db.Find(&user, email); result.Error != nil {
+		log.Fatal(result.Error)
+		return nil, result.Error
+	}
+	return user, nil
 }
