@@ -32,7 +32,9 @@ app.ws('/', (ws, req) => {
                 broadcastMessaging(
                     JSON.stringify({
                         username: message.username,
-                        message: message.body,
+                        message: message.message,
+                        room: message.room,
+                        createdAt: message.createdAt,
                         type: 'message',
                     }),
                 );

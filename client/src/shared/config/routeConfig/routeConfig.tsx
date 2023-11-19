@@ -1,6 +1,7 @@
 import { RouteProps } from 'react-router-dom';
 import { MainPage } from 'pages/MainPage';
 import { NotFound } from 'pages/common/NotFound';
+import { ChatPage } from 'pages/ChatPage';
 
 export type AppRoutesProps = RouteProps & {
     authOnly?: boolean;
@@ -9,6 +10,7 @@ export type AppRoutesProps = RouteProps & {
 
 export enum AppRoutes {
     MAIN = 'main',
+    CHAT = 'chat',
 
     // last
     NOT_FOUND = 'not_found',
@@ -16,6 +18,7 @@ export enum AppRoutes {
 
 export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.MAIN]: '/',
+    [AppRoutes.CHAT]: '/chat',
 
     // last
     [AppRoutes.NOT_FOUND]: '*',
@@ -25,7 +28,10 @@ export const routerConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.MAIN]: {
         path: RoutePath.main,
         element: <MainPage />,
-        loggedOutOnly: true,
+    },
+    [AppRoutes.CHAT]: {
+        path: `${RoutePath.chat}/:roomId`,
+        element: <ChatPage />,
     },
 
     // last
