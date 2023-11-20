@@ -1,0 +1,9 @@
+.Sidebar {
+    width: 100px;
+    background: green;
+    transition: width 150ms;
+}
+
+.active {
+    width: 400px;
+}

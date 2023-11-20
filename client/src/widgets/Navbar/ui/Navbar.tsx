@@ -11,6 +11,8 @@ export interface NavbarProps {
 
 export const Navbar = memo(({ className }: NavbarProps) => (
     <HStack maxW justify="between" className={classNames(classes.Navbar, {}, [className])}>
-        <AppLink to={RoutePath.main}>Навбар</AppLink>
+        <AppLink to={RoutePath.main}>
+            <h4>Навбар</h4>
+        </AppLink>
     </HStack>
 ));

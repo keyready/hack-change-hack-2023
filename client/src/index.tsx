@@ -5,6 +5,7 @@ import { App } from 'app/App';
 import { createRoot } from 'react-dom/client';
 import { StoreProvider } from 'app/providers/StoreProvider';
 import { ErrorBoundary } from 'app/providers/ErrorBoundary';
+import { PrimeReactProvider } from 'primereact/api';
 
 const container = document.getElementById('root');
 if (!container) {
@@ -14,12 +15,14 @@ if (!container) {
 const root = createRoot(container);
 root.render(
     <BrowserRouter>
-        <StoreProvider>
-            <ErrorBoundary>
-                <ThemeProvider>
-                    <App />
-                </ThemeProvider>
-            </ErrorBoundary>
-        </StoreProvider>
+        <PrimeReactProvider>
+            <StoreProvider>
+                <ErrorBoundary>
+                    <ThemeProvider>
+                        <App />
+                    </ThemeProvider>
+                </ErrorBoundary>
+            </StoreProvider>
+        </PrimeReactProvider>
     </BrowserRouter>,
 );
