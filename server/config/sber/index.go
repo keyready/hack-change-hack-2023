@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	SBER_ID_Config = &oauth2.Config{
+	SberIdConfig = &oauth2.Config{
 		ClientID:     os.Getenv("CLIENT_ID"),
 		ClientSecret: os.Getenv("CLIENT_SECRET"),
 		RedirectURL:  os.Getenv("REDIRECT_URL"),
@@ -18,5 +18,5 @@ var (
 			TokenURL: os.Getenv("TOKEN_URL"),
 		},
 	}
-	state, err = userutils.GenerateStateParam()
+	state = userutils.GenerateStateParam()
 )
