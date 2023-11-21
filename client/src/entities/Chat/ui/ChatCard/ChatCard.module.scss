@@ -1,8 +1,8 @@
 .ChatCard {
     cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
     transition: 200ms ease-out;
-	padding: 10px;
-	border-radius: 10px;
 
     &:hover {
         background-color: darkgray;

@@ -1,16 +1,39 @@
+.InputWrapper {
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: #FFF;
+    gap: 10px;
+    outline: 1px solid var(--secondary-color);;
+    transition: 200ms;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    fill: transparent;
+    color: var(--secondary-color);;
+    transition: 200ms;
+}
+
 .Input {
     width: 100%;
-    padding: 5px 10px;
     border: none;
-    color: inherit;
+    color: var(--secondary-color);;
     background: transparent;
     font: var(--font-m);
-    transition: 200ms;
-    margin-bottom: 5px;
-    border-bottom: 2px solid var(--card-bg);
     outline: none;
+    transition: 200ms;
+}
 
-    &:active, &:focus {
-        border-bottom: 2px solid var(--inverted-bg-color);
+.focusedWrapper {
+    outline: 1.5px solid var(--primary-color);
+    box-shadow: 0 0 2px 8px #21A03826;
+
+    .Input {
+        color: var(--primary-color);
+    }
+
+    .icon {
+        color: var(--primary-color);
     }
 }

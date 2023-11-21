@@ -1,22 +1,52 @@
 .Button {
     cursor: pointer;
-    padding: 5px 15px;
-    border-radius: 5px;
-    color: var(--inverted-primary-color);
-    background: var(--inverted-bg-color);
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: var(--inverted-secondary-color);
+    background: var(--primary-color);
     font: var(--font-m);
+    font-weight: bold;
     transition: 200ms;
 
     &:hover {
+        color: var(--primary-color);
         background: var(--bg-color);
     }
 
     &:active {
+        color: var(--primary-color);
         outline: 1px solid var(--primary-color);
     }
 
     &:focus {
         box-shadow: 1px 1px 4px black;
+    }
+}
+
+.sber {
+    padding: 12px 40px;
+    border: none;
+    border-radius: 8px;
+    background: var(--sber-color);
+    font: var(--font-xs);
+    outline: none;
+
+    &:hover {
+        border: none;
+        color: var(--inverted-secondary-color);
+        background: var(--sber-color);
+        filter: brightness(0.9);
+        outline: none;
+    }
+
+    &:active {
+        outline: none;
+        box-shadow: 0 0 2px 8px #21A03826;
+    }
+
+    &:focus {
+        box-shadow: 0 0 2px 8px #21A03826;
+        outline: none;
     }
 }
 

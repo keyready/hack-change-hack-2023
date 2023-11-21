@@ -1,0 +1,21 @@
+.p-inputtext.p-component.p-filled.p-autocomplete-input,
+.p-inputtext.p-component.p-autocomplete-input.p-autocomplete-input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font: var(--font-m);
+    padding: 0;
+
+    &:focus {
+        color: var(--primary-color);
+    }
+}
+
+.p-inputtext {
+    width: 100%;
+    box-shadow: none;
+}
+
+.p-autocomplete.p-component.p-inputwrapper {
+    width: 100%;
+}

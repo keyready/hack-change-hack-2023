@@ -1,5 +1,8 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { ButtonHTMLAttributes, memo, ReactNode } from 'react';
+import SberBtnIcon from 'shared/assets/icons/sber-btn-icon.svg';
+import { Icon } from 'shared/UI/Icon/Icon';
+import { HStack } from 'shared/UI/Stack';
 import { variantsMapper } from '../types/button.mapper';
 import { buttonVariants } from '../types/button.types';
 import classes from './Button.module.scss';
@@ -23,7 +26,10 @@ export const Button = memo((props: ButtonProps) => {
             disabled={disabled}
             {...otherProps}
         >
-            {children}
+            <HStack align="center" maxW gap="8" justify="center">
+                {variant === 'sber' && <Icon Svg={SberBtnIcon} />}
+                {children}
+            </HStack>
         </button>
     );
 });
