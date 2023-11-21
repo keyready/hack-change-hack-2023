@@ -1,0 +1,25 @@
+:root {
+    --bg-color: #FFF;
+    --inverted-bg-color: #1A1D21;
+    --sber-color: #21A038;
+    --sber-color-rgb: 33 160 56;
+
+    // card
+    --card-bg: #0D0F10;
+    --green-card-bg: #42E3B426;
+    --purple-card-bg: #9747FF26;
+    --accent-gradient: 94deg, #302F2F -2.56%, rgb(48 47 47 / 0%) 103%;
+
+    // текст
+    --primary-color: #000;
+    --primary-gradient: linear-gradient(94deg, #21A038 0%, #A0E720 100%);
+    --inverted-primary-color: #c27b57;
+
+    // вторичный цвет
+    --secondary-color: #767676;
+    --inverted-secondary-color: #fff;
+
+    // skeleton
+    --skeleton-shadow: #275594;
+    --skeleton-color: #0e0e75;
+}
