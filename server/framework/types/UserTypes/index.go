@@ -22,3 +22,13 @@ type UserDataResponse struct {
 type ResponseToken struct {
 	Jwt string `json:"jwt"`
 }
+
+type AddDocument struct {
+	Series         string `json:"series"`
+	Number         string `json:"number"`
+	IssuedBy       string `json:"issued_by"`
+	IssuedDate     string `json:"issued_date"`
+	Code           string `json:"code"`
+	PlannedEndDate string `json:"planned_end_date"`
+	Img            string `json:"img"`
+}

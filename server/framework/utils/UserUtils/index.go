@@ -4,9 +4,12 @@ import (
 	"crypto/rand"
 	"encoding/base64"
 	"log"
+	"net/http"
 	usertypes "server/framework/types/UserTypes"
+	errorutils "server/framework/utils/ErrorUtils"
 	"server/models"
 
+	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
@@ -55,4 +58,35 @@ func GenerateStateParam() string {
 	}
 	rndString := base64.URLEncoding.EncodeToString(randomBytes)
 	return rndString[:]
+}
+
+func generateFileName() string {
+	randomBytes := make([]byte, 10)
+	_, err := rand.Read(randomBytes)
+	if err != nil {
+		return ""
+	}
+	rndString := base64.URLEncoding.EncodeToString(randomBytes)
+	return rndString[:]
+}
+
+func SaveUserImg(ctx *gin.Context) {
+	file, header, err := ctx.Request.FormFile("img")
+	if err != nil {
+		errorutils.Fail(ctx, http.StatusBadRequest, "no upload image")
+		return
+	}
+	defer file.Close()
+
+	filename := "../../../static/images/" + generateFileName()
+
+	err = ctx.SaveUploadedFile(header, filename)
+	if err != nil {
+		log.Fatal(err)
+		errorutils.Fail(ctx, http.StatusBadRequest, "no save image")
+		return
+	}
+
+	errorutils.Success(ctx, http.StatusOK, "upload image success")
+	return
 }

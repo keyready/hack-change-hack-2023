@@ -57,5 +57,6 @@ type UserModel struct {
 	DrivingLicense string    `gorm:"unique" json:"driving_license"`
 	PlaceOfBirth   string    `json:"place_of_birth"`
 
+	Img  string `gorm:"unique" json:"img"`
 	Role string `gorm:"default:'user'" json:"role"`
 }
