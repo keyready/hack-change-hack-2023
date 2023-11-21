@@ -2,7 +2,6 @@ package sber
 
 import (
 	"os"
-	userutils "server/framework/utils/UserUtils"
 
 	"golang.org/x/oauth2"
 )
@@ -18,5 +17,5 @@ var (
 			TokenURL: os.Getenv("TOKEN_URL"),
 		},
 	}
-	state = userutils.GenerateStateParam()
+	state = os.Getenv("STATE")
 )

@@ -14,7 +14,11 @@ type LoginUser struct {
 	Password string `json:"password"`
 }
 
-type ResponseJWT struct {
+type UserDataResponse struct {
 	ID   uint   `json:"id"`
-	Role string `json:"role"`
+	Role string `json:"string"`
+}
+
+type ResponseToken struct {
+	Jwt string `json:"jwt"`
 }

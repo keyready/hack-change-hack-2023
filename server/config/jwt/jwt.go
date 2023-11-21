@@ -20,7 +20,6 @@ func InitJWT() {
 	_, err := rand.Read(randByte[:])
 	if err != nil {
 		log.Fatal(err)
-
 	}
 
 	jwtKey = randByte[:]
@@ -42,7 +41,7 @@ func GenerateToken(id uint, role string) (*string, error) {
 	return &token, nil
 }
 
-func VerifyToken(token string) (*usertypes.ResponseJWT, error) {
+func VerifyToken(token string) (*usertypes.UserDataResponse, error) {
 	parsed, err := jwt.Parse(token, func(t *jwt.Token) (interface{}, error) {
 		if _, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("unexpected signing method: %v", t.Header["alg"])
@@ -77,7 +76,7 @@ func VerifyToken(token string) (*usertypes.ResponseJWT, error) {
 		return nil, errors.New("jwt error")
 	}
 
-	userData := usertypes.ResponseJWT{
+	userData := usertypes.UserDataResponse{
 		ID:   id,
 		Role: role,
 	}

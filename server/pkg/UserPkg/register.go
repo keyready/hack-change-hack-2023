@@ -43,6 +43,7 @@ func (h handler) RegisterUser(ctx *gin.Context) {
 		return
 	}
 
-	errorutils.Success(ctx, http.StatusCreated, "user created")
-	return
+	// errorutils.Success(ctx, http.StatusCreated, "user created")
+	ctx.Redirect(http.StatusTemporaryRedirect, "/api/login")
+	// return
 }

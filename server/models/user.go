@@ -38,53 +38,6 @@ import (
     "country_code": "Код страны",
     "country_name": "Наименование страны"
   },
-  "place_of_birth": "Место рождения",
-  "address": {
-    "full_address": "Полный адрес",
-    "fias_code": "Идентификационный код объекта по ФИАС",
-    "post_index": "Почтовый индекс",
-    "country": "Страна",
-    "region": "Регион",
-    "district": "Район",
-    "city": "Город",
-    "settlement": "Населенный пункт",
-    "street": "Название улицы",
-    "house": "Дом",
-    "building": "Строение",
-    "bulk": "Корпус",
-    "apartment": "Квартира"
-  },
-  "address_of_actual_residence": {
-    "full_address": "Полный адрес",
-    "fias_code": "Идентификационный код объекта по ФИАС",
-    "post_index": "Почтовый индекс",
-    "country": "Страна",
-    "region": "Регион",
-    "district": "Район",
-    "city": "Город",
-    "settlement": "Населенный пункт",
-    "street": "Название улицы",
-    "house": "Дом",
-    "building": "Строение",
-    "bulk": "Корпус",
-    "apartment": "Квартира"
-  },
-  "address_reg": {
-    "full_address": "Полный адрес",
-    "fias_code": "Идентификационный код объекта по ФИАС",
-    "post_index": "Почтовый индекс",
-    "country": "Страна",
-    "region": "Регион",
-    "district": "Район",
-    "city": "Город",
-    "settlement": "Населенный пункт",
-    "street": "Название улицы",
-    "house": "Дом",
-    "building": "Строение",
-    "bulk": "Корпус",
-    "apartment": "Квартира"
-  },
-
 */
 
 type UserModel struct {
@@ -102,6 +55,7 @@ type UserModel struct {
 	Inn            string    `gorm:"unique" json:"inn"`
 	Snils          string    `gorm:"unique" json:"snils"`
 	DrivingLicense string    `gorm:"unique" json:"driving_license"`
+	PlaceOfBirth   string    `json:"place_of_birth"`
 
 	Role string `gorm:"default:'user'" json:"role"`
 }

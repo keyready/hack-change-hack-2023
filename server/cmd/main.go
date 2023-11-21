@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"os"
 	"server/config/db"
-	sberauth "server/pkg/SberAuth"
+	"server/config/jwt"
+	sberauth "server/pkg/SberPkg"
 	userpkg "server/pkg/UserPkg"
 
 	"github.com/gin-gonic/gin"
@@ -16,10 +17,11 @@ func main() {
 
 	godotenv.Load(".env")
 	dbHandler := db.Connect_db(os.Getenv("DB_URI"))
+	jwt.InitJWT()
 	r.Static("/static", "../static")
 
 	userpkg.UserRoutes(r, dbHandler)
-	sberauth.Oauth2Routes(r, dbHandler)
+	sberauth.SberRoutes(r, dbHandler)
 
 	fmt.Println("Server started http://localhost:%p", os.Getenv("PORT"))
 	r.Run(":" + os.Getenv("PORT"))

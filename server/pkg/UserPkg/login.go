@@ -3,6 +3,7 @@ package userpkg
 import (
 	"log"
 	"net/http"
+	"server/config/jwt"
 	usertypes "server/framework/types/UserTypes"
 	errorutils "server/framework/utils/ErrorUtils"
 	userutils "server/framework/utils/UserUtils"
@@ -35,6 +36,11 @@ func (h handler) LoginUser(ctx *gin.Context) {
 		return
 	}
 
-	errorutils.Success(ctx, http.StatusOK, "login success")
+	jwt, err := jwt.GenerateToken(user.ID, user.Role)
+	if err != nil {
+		errorutils.InternalServerError(ctx, err)
+		return
+	}
+	errorutils.Success(ctx, http.StatusOK, &usertypes.ResponseToken{Jwt: *jwt})
 	return
 }
