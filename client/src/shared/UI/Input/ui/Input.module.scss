@@ -1,0 +1,39 @@
+.InputWrapper {
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: #FFF;
+    gap: 10px;;
+    transition: 200ms;
+    outline: 1px solid var(--secondary-color);
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    color: var(--secondary-color);;
+    transition: 200ms;
+    fill: transparent;
+}
+
+.Input {
+    width: 100%;
+    border: none;
+    color: var(--secondary-color);;
+    background: transparent;
+    font: var(--font-m);
+    transition: 200ms;
+    outline: none;
+}
+
+.focusedWrapper {
+    outline: 1.5px solid var(--primary-color);
+    box-shadow: 0 0 2px 8px #21A03826;
+
+    .Input {
+        color: var(--primary-color);
+    }
+
+    .icon {
+        color: var(--primary-color);
+    }
+}
