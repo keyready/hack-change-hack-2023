@@ -26,7 +26,8 @@ export const Button = memo((props: ButtonProps) => {
             disabled={disabled}
             {...otherProps}
         >
-            <HStack align="center" maxW gap="8" justify="center">
+            <HStack align="center" maxW gap="8"
+justify="center">
                 {variant === 'sber' && <Icon Svg={SberBtnIcon} />}
                 {children}
             </HStack>

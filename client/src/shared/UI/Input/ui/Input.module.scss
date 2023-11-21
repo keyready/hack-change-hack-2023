@@ -2,17 +2,17 @@
     padding: 10px 15px;
     border-radius: 8px;
     background: #FFF;
-    gap: 10px;
-    outline: 1px solid var(--secondary-color);;
+    gap: 10px;;
     transition: 200ms;
+    outline: 1px solid var(--secondary-color);
 }
 
 .icon {
     width: 20px;
     height: 20px;
-    fill: transparent;
     color: var(--secondary-color);;
     transition: 200ms;
+    fill: transparent;
 }
 
 .Input {
@@ -21,8 +21,8 @@
     color: var(--secondary-color);;
     background: transparent;
     font: var(--font-m);
-    outline: none;
     transition: 200ms;
+    outline: none;
 }
 
 .focusedWrapper {

@@ -11,6 +11,7 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { AuthActions } from 'pages/AuthPage';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
+import { sberIdLogin } from 'pages/AuthPage/model/services/sberIdLogin';
 import { authLogin } from '../../model/services/authLogin';
 import {
     getAuthEmail,
@@ -58,7 +59,13 @@ export const AuthForm = memo((props: AuthFormProps) => {
         },
         [dispatch, email, navigate, password],
     );
-    const handleSberLoginClick = useCallback(() => {}, []);
+    const handleSberLoginClick = useCallback(async () => {
+        const result = await dispatch(sberIdLogin());
+
+        if (result.meta.requestStatus === 'fulfilled') {
+            console.log(result.payload);
+        }
+    }, [dispatch]);
 
     return (
         <VStack gap="32" maxW className={classNames(classes.AuthForm, {}, [className])}>

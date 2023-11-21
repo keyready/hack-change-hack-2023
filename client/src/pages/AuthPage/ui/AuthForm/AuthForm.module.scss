@@ -3,8 +3,8 @@
     padding: 87px 45px;
 
     h1, h2, h3, h4, p {
-        color: var(--inverted-bg-color);
         margin: 0;
+        color: var(--inverted-bg-color);
     }
 }
 
@@ -19,10 +19,10 @@
 }
 
 .hr {
-    margin: 0;
-    padding: 0;
     width: 100%;
     height: 1px;
+    margin: 0;
+    padding: 0;
     background: var(--secondary-color);
 }
 
