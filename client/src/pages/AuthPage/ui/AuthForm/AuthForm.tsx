@@ -54,7 +54,7 @@ export const AuthForm = memo((props: AuthFormProps) => {
             const result = await dispatch(authLogin({ email, password }));
 
             if (result.meta.requestStatus === 'fulfilled') {
-                navigate(`${RoutePath.chat}/email`);
+                navigate(`${RoutePath.chat}/${email}`);
             }
         },
         [dispatch, email, navigate, password],
@@ -78,23 +78,25 @@ export const AuthForm = memo((props: AuthFormProps) => {
 
             <form onSubmit={handleFormSubmit} style={{ width: '100%' }}>
                 <VStack maxW gap="16">
-                    <MailInput value={email} setValue={handleEmailChange} svg={MailInputIcon} />
-                    <Input
-                        svg={PasswordInputIcon}
-                        type="password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                        placeholder="Введите пароль"
-                    />
+                    <VStack maxW gap="16">
+                        <MailInput value={email} setValue={handleEmailChange} svg={MailInputIcon} />
+                        <Input
+                            svg={PasswordInputIcon}
+                            type="password"
+                            value={password}
+                            onChange={handlePasswordChange}
+                            placeholder="Введите пароль"
+                        />
+                    </VStack>
+
+                    <HStack maxW justify="end">
+                        <p>Забыли пароль?</p>
+                    </HStack>
+
+                    <Button type="submit" className={classes.btn}>
+                        Войти
+                    </Button>
                 </VStack>
-
-                <HStack maxW justify="end">
-                    <p>Забыли пароль?</p>
-                </HStack>
-
-                <Button type="submit" className={classes.btn}>
-                    Войти
-                </Button>
             </form>
 
             <HStack maxW gap="8">
