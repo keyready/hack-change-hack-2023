@@ -9,7 +9,7 @@ import classes from './MainPage.module.scss';
 
 const MainPage = () => {
     useEffect(() => {
-        document.title = 'Hack&Change 2023';
+        document.title = 'СберКредит | Hack&Change 2023';
     }, []);
 
     return (
