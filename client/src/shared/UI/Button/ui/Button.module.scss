@@ -1,13 +1,13 @@
 .Button {
     cursor: pointer;
     padding: 10px 15px;
-    border-radius: 8px;
     border: none;
-    outline: none;
+    border-radius: 8px;
     color: var(--inverted-secondary-color);
     background: var(--sber-color);
     font: var(--font-m);
     transition: 200ms;
+    outline: none;
 
     &:hover {
         filter: brightness(1.1);
@@ -89,10 +89,10 @@
     padding: 0;
     border: none;
     border-radius: 0;
+    color: var(--primary-color);
     background: transparent;
     outline: none;
     line-height: 0;
-    color: var(--primary-color);
 
     &:hover {
         background: none;

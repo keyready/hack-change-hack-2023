@@ -1,9 +1,9 @@
 .PurpleCard {
-    display: grid;
     width: 100%;
     padding: 30px 20px;
     border-radius: 20px;
     background: var(--purple-card-bg);
+    display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 90px;
 }
