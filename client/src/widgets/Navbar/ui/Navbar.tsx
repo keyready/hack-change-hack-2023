@@ -14,7 +14,6 @@ export interface NavbarProps {
     className?: string;
 }
 
-
 export const Navbar = memo(({ className }: NavbarProps) => {
     const navigate = useNavigate();
 

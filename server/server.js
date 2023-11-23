@@ -98,7 +98,7 @@ app.ws('/chat', async (ws, req) => {
                     JSON.stringify({
                         type: 'message',
                         sender: 'bot',
-                        body: answer,
+                        body: `<h3>${answer}</h3>`,
                     }),
                 );
                 break;

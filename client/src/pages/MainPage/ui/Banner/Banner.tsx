@@ -13,7 +13,8 @@ export const Banner = memo((props: BannerProps) => {
 
     return (
         <HStack align="start" maxW className={classNames(classes.Banner, {}, [className])}>
-            <VStack className={classes.wrapper} maxW gap="8" justify="between">
+            <VStack className={classes.wrapper} maxW gap="8"
+justify="between">
                 <VStack maxW gap="16">
                     <h3>Кешбэк за кредит со СберПремьером</h3>
                     <p>

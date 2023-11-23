@@ -13,7 +13,8 @@ export const PurpleCard = memo((props: PurpleCardProps) => {
 
     return (
         <div className={classNames(classes.PurpleCard, {}, [className])}>
-            <VStack justify="between" maxW gap="8" className={classes.textBlock}>
+            <VStack justify="between" maxW gap="8"
+className={classes.textBlock}>
                 <VStack maxW gap="8">
                     <h3 className={classes.title}>
                         Бонусы за кредит подписчикам <br /> СберПрайм+
