@@ -1,12 +1,14 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { FormEvent, memo, useCallback, useState } from 'react';
 import { HStack, VStack } from 'shared/UI/Stack';
-import { PopularQueryCard } from 'features/CreditChat/ui/PopularQueryCard/PopularQueryCard';
 import SalutIcon from 'shared/assets/icons/salut-icon.svg';
 import SendIcon from 'shared/assets/icons/send-icon.svg';
 import { Icon } from 'shared/UI/Icon/Icon';
 import { Button } from 'shared/UI/Button';
+import useWebSocket from 'react-use-websocket';
+import { PopularQueryCard } from '../PopularQueryCard/PopularQueryCard';
 import classes from './CreditChatInput.module.scss';
+import { useSuggestionsCards } from '../../api/fetchSuggestionCardsApi';
 
 interface CreditChatInputProps {
     className?: string;
@@ -14,11 +16,12 @@ interface CreditChatInputProps {
     setValue: (value: string) => void;
     setFocus: (flag: boolean) => void;
     handleMessageSend: () => void;
-    handleQueryCardClick: (value: string) => void;
 }
 
 export const CreditChatInput = memo((props: CreditChatInputProps) => {
-    const { className, setValue, value, setFocus, handleMessageSend, handleQueryCardClick } = props;
+    const { className, setValue, value, setFocus, handleMessageSend } = props;
+
+    const { data: popularCards, isLoading: isSuggestionsCardsLoading } = useSuggestionsCards();
 
     const preventFormDefault = useCallback(
         (event: FormEvent<HTMLFormElement>) => {
@@ -26,6 +29,13 @@ export const CreditChatInput = memo((props: CreditChatInputProps) => {
             handleMessageSend();
         },
         [handleMessageSend],
+    );
+
+    const handleQueryCardClick = useCallback(
+        (title: string) => {
+            setValue(title);
+        },
+        [setValue],
     );
 
     return (
@@ -54,10 +64,21 @@ export const CreditChatInput = memo((props: CreditChatInputProps) => {
                 </form>
 
                 <HStack className={classes.popularQueryCardWrapper} justify="between" gap="16">
-                    <PopularQueryCard onClick={handleQueryCardClick} title="привет мир!" />
-                    <PopularQueryCard onClick={handleQueryCardClick} title="привет мир!" />
-                    <PopularQueryCard onClick={handleQueryCardClick} title="привет мир!" />
-                    <PopularQueryCard onClick={handleQueryCardClick} title="привет мир!" />
+                    {isSuggestionsCardsLoading ? (
+                        <p>Загрузка</p>
+                    ) : (
+                        popularCards?.map((card, index) => {
+                            if (!card) return '';
+
+                            return (
+                                <PopularQueryCard
+                                    key={index}
+                                    onClick={handleQueryCardClick}
+                                    title={card.title}
+                                />
+                            );
+                        })
+                    )}
                 </HStack>
             </VStack>
         </HStack>

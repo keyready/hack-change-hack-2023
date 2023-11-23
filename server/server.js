@@ -32,7 +32,18 @@ app.post('/api/login', (req, res) => {
     });
 });
 
-app.ws('/', (ws, req) => {
+app.get('/api/suggestion_card', async (req, res) =>
+    res.status(200).json([
+        { id: 1, title: 'Оформить кредит' },
+        { id: 2, title: 'Причины отказа' },
+        { id: 3, title: 'Статус заявки' },
+        { id: 4, title: 'Документы' },
+        { id: 5, title: 'Время обработки заявки' },
+    ]),
+);
+
+app.ws('/chat', (ws, req) => {
+    console.log('connected');
     ws.on('message', (event) => {
         const message = JSON.parse(event);
 
@@ -50,13 +61,19 @@ app.ws('/', (ws, req) => {
                 break;
 
             case 'message':
-                broadcastMessaging(
+                switch (message) {
+                }
+                ws.send(
                     JSON.stringify({
-                        username: message.username,
-                        message: message.message,
-                        room: message.room,
-                        createdAt: message.createdAt,
                         type: 'message',
+                        sender: 'bot',
+                        body: `
+<p>Требования к заёмщику:</p>
+<ul>
+<li>Гражданин РФ</li>
+<li>От 18 до 80 лет на момент полного погашения кредита</li>
+<li>Стаж работы от 1 месяца или от 6 месяцев, если не получаете зарплату на карту СберБанка</li>
+</ul>`,
                     }),
                 );
                 break;
