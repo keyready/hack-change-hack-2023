@@ -1,6 +1,7 @@
 import { Page } from 'widgets/Page/Page';
 import { useEffect } from 'react';
 import { VStack } from 'shared/UI/Stack';
+import { CreditChat } from 'features/CreditChat';
 import { GreenCard } from '../GreenCard/GreenCard';
 import { PurpleCard } from '../PurpleCard/PurpleCard';
 import { Banner } from '../Banner/Banner';
@@ -13,16 +14,19 @@ const MainPage = () => {
     }, []);
 
     return (
-        <Page>
-            <VStack maxW gap="32">
-                <div className={classes.cardsWrapper}>
-                    <GreenCard />
-                    <PurpleCard />
-                </div>
-                <Banner />
-                <StepsBlock />
-            </VStack>
-        </Page>
+        <VStack maxW>
+            <CreditChat />
+            <Page className={classes.MainPage}>
+                <VStack maxW gap="32">
+                    <div className={classes.cardsWrapper}>
+                        <GreenCard />
+                        <PurpleCard />
+                    </div>
+                    <Banner />
+                    <StepsBlock />
+                </VStack>
+            </Page>
+        </VStack>
     );
 };
 

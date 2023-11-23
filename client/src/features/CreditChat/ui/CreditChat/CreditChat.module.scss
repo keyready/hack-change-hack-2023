@@ -1,0 +1,22 @@
+.CreditChat {
+    width: 100%;
+    padding: 30px;
+    background: linear-gradient(94deg, #21A038 0%, #A0E720 100%);
+    transition: height 200ms;
+
+    h1 {
+        color: var(--inverted-secondary-color);
+    }
+}
+
+.btn {
+    cursor: pointer;
+    width: 240px;
+    height: 64px;
+    border-radius: 16px;
+    background: lightcoral;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
