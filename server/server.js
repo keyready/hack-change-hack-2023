@@ -94,8 +94,6 @@ app.ws('/chat', async (ws, req) => {
 
                 const answer = await sendMessage([{ role: 'user', content: prompt }]);
 
-                console.log(prompt, answer);
-
                 ws.send(
                     JSON.stringify({
                         type: 'message',
@@ -103,20 +101,6 @@ app.ws('/chat', async (ws, req) => {
                         body: answer,
                     }),
                 );
-
-                //                 ws.send(
-                //                     JSON.stringify({
-                //                         type: 'message',
-                //                         sender: 'bot',
-                //                         body: `}`;
-                // <p>Требования к заёмщику:</p>
-                // <ul>
-                // <li>Гражданин РФ</li>
-                // <li>От 18 до 80 лет на момент полного погашения кредита</li>
-                // <li>Стаж работы от 1 месяца или от 6 месяцев, если не получаете зарплату на карту СберБанка</li>
-                // </ul>`,
-                //                     }),
-                //                 );
                 break;
         }
     });
