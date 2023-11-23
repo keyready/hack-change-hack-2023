@@ -1,25 +1,25 @@
 .Button {
     cursor: pointer;
     padding: 10px 15px;
+    border: none;
     border-radius: 8px;
     color: var(--inverted-secondary-color);
-    background: var(--primary-color);
+    background: var(--sber-color);
     font: var(--font-m);
-    font-weight: bold;
     transition: 200ms;
+    outline: none;
 
     &:hover {
-        color: var(--primary-color);
-        background: var(--bg-color);
+        filter: brightness(1.1);
     }
 
     &:active {
-        color: var(--primary-color);
-        outline: 1px solid var(--primary-color);
+        filter: brightness(1.1);
+        transform: scale(1.02);
     }
 
     &:focus {
-        box-shadow: 1px 1px 4px black;
+        filter: brightness(1.1);
     }
 }
 
@@ -69,18 +69,18 @@
 
 .outlined {
     background: none;
-    outline: 2px solid var(--navbar-bg);
+    outline: 1px solid var(--primary-color);
 
     &:hover {
-        background: var(--navbar-bg);
+        transform: scale(1.02);
     }
 
     &:active {
-        outline: 2px solid var(--primary-color);
+        transform: scale(1.02);
     }
 
     &:focus {
-        box-shadow: 1px 1px 4px black;
+        box-shadow: none;
     }
 }
 
@@ -89,8 +89,10 @@
     padding: 0;
     border: none;
     border-radius: 0;
+    color: var(--primary-color);
     background: transparent;
     outline: none;
+    line-height: 0;
 
     &:hover {
         background: none;

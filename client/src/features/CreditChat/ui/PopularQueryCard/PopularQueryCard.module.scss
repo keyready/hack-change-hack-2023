@@ -1,0 +1,12 @@
+.PopularQueryCard {
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 4px 20px 20px;
+    color: #000;
+    background: #FFF;
+    transition: 200ms;
+
+    &:hover {
+        transform: scale(1.02);
+    }
+}

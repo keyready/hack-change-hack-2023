@@ -1,0 +1,24 @@
+.Banner {
+    padding: 30px 20px;
+    border-radius: 20px;
+    background: #235850;
+
+    h3, p {
+        color: var(--inverted-secondary-color);
+    }
+}
+
+.wrapper {
+    height: 300px;
+}
+
+.img {
+    position: relative;
+    align-self: center;
+}
+
+.btn {
+    color: var(--inverted-secondary-color);
+    font: var(--font-xs);
+    justify-self: start;
+}

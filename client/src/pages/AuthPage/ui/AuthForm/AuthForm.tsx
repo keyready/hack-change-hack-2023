@@ -52,12 +52,8 @@ export const AuthForm = memo((props: AuthFormProps) => {
             event.preventDefault();
 
             const result = await dispatch(authLogin({ email, password }));
-
-            if (result.meta.requestStatus === 'fulfilled') {
-                navigate(`${RoutePath.chat}/${email}`);
-            }
         },
-        [dispatch, email, navigate, password],
+        [dispatch, email, password],
     );
     const handleSberLoginClick = useCallback(async () => {
         const result = await dispatch(sberIdLogin());

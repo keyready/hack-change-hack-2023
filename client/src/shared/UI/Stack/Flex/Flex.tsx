@@ -50,6 +50,7 @@ export interface FlexProps extends DivProps {
 
 export const Flex = (props: FlexProps) => {
     const {
+        style,
         className,
         children,
         align = 'center',
@@ -75,7 +76,12 @@ export const Flex = (props: FlexProps) => {
     ];
 
     return (
-        <div onClick={onClick} className={classNames(classes.Flex, mods, classesMapper)}>
+        <div
+            {...props}
+            style={style}
+            onClick={onClick}
+            className={classNames(classes.Flex, mods, classesMapper)}
+        >
             {children}
         </div>
     );
