@@ -26,16 +26,21 @@ export const CreditChatInput = memo((props: CreditChatInputProps) => {
     const preventFormDefault = useCallback(
         (event: FormEvent<HTMLFormElement>) => {
             event.preventDefault();
+
+            if (!value) return;
+
+            setFocus(true);
             handleMessageSend();
         },
-        [handleMessageSend],
+        [handleMessageSend, setFocus, value],
     );
 
     const handleQueryCardClick = useCallback(
         (title: string) => {
             setValue(title);
+            setFocus(true);
         },
-        [setValue],
+        [setFocus, setValue],
     );
 
     return (

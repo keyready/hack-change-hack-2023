@@ -1,8 +1,11 @@
 import { classNames } from 'shared/lib/classNames/classNames';
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { HStack, VStack } from 'shared/UI/Stack';
 import useWebSocket from 'react-use-websocket';
 import { Message, MessageCard } from 'entities/Message';
+import CloseIcon from 'shared/assets/icons/close-btn-icon.svg';
+import { Icon } from 'shared/UI/Icon/Icon';
+import { Button } from 'shared/UI/Button';
 import { prepareWSMessage } from '../../utils/PrepareWSMessage';
 import { CreditChatInput } from '../CreditChatInput/CreditChatInput';
 import classes from './CreditChat.module.scss';
@@ -14,7 +17,7 @@ interface CreditChatProps {
 export const CreditChat = memo((props: CreditChatProps) => {
     const { className } = props;
 
-    const { readyState, sendMessage, lastMessage } = useWebSocket('ws://localhost:5000/chat');
+    const { sendMessage, lastMessage } = useWebSocket('ws://localhost:5000/chat');
 
     const [inputQuery, setInputQuery] = useState<string>('');
     const [focus, setFocus] = useState<boolean>(false);
@@ -41,6 +44,9 @@ export const CreditChat = memo((props: CreditChatProps) => {
         sendMessage(prepareWSMessage(inputQuery, 'message'));
         setMessages((prevState) => [...prevState, { body: inputQuery, sender: 'user' }]);
         setInputQuery('');
+
+        const messagesArea = document.querySelector('#messagesAreaRef');
+        if (messagesArea) messagesArea.scrollTo(0, messagesArea.scrollHeight);
     }, [inputQuery, sendMessage]);
 
     useEffect(() => {
@@ -50,6 +56,11 @@ export const CreditChat = memo((props: CreditChatProps) => {
             setMessages((prevState) => [...prevState, { body, sender }]);
         }
     }, [lastMessage]);
+
+    useEffect(() => {
+        const messagesArea = document.querySelector('#messagesAreaRef');
+        if (messagesArea) messagesArea.scrollTo(0, messagesArea.scrollHeight);
+    }, [messages]);
 
     return (
         <VStack
@@ -62,6 +73,19 @@ export const CreditChat = memo((props: CreditChatProps) => {
             }}
             className={classNames(classes.CreditChat, {}, [className])}
         >
+            {focus && (
+                <Button
+                    onClick={() => {
+                        setHeight(40);
+                        setFocus(false);
+                    }}
+                    variant="clear"
+                    className={classes.closeBtn}
+                >
+                    <Icon Svg={CloseIcon} />
+                </Button>
+            )}
+
             {!focus && (
                 <VStack maxW justify="center" gap="16" align="center">
                     <h1>Кредит на любые цели</h1>
@@ -73,8 +97,14 @@ export const CreditChat = memo((props: CreditChatProps) => {
                 </VStack>
             )}
 
-            {messages.length ? (
-                <VStack className={classes.chatArea} maxW justify="start" align="start">
+            {messages.length && focus ? (
+                <VStack
+                    id="messagesAreaRef"
+                    className={classes.chatArea}
+                    maxW
+                    justify="start"
+                    align="start"
+                >
                     {messages.map((message) => (
                         <MessageCard message={message.body} type={message.sender} />
                     ))}
@@ -85,7 +115,6 @@ export const CreditChat = memo((props: CreditChatProps) => {
 
             <CreditChatInput
                 handleMessageSend={handleMessageSend}
-                // handleQueryCardClick={(value) => setInputQuery(value)}
                 setFocus={setFocus}
                 value={inputQuery}
                 setValue={setInputQuery}

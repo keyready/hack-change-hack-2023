@@ -77,6 +77,7 @@ export const Flex = (props: FlexProps) => {
 
     return (
         <div
+            {...props}
             style={style}
             onClick={onClick}
             className={classNames(classes.Flex, mods, classesMapper)}
