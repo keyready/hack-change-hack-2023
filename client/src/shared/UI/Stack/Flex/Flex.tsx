@@ -5,7 +5,7 @@ import classes from './Flex.module.scss';
 export type FlexDirection = 'row' | 'column';
 export type FlexAlign = 'center' | 'start' | 'end' | 'stretch';
 export type FlexJustify = 'center' | 'start' | 'end' | 'between';
-export type FlexGap = '4' | '8' | '16' | '32';
+export type FlexGap = '0' | '4' | '8' | '16' | '32';
 
 const alignClasses: Record<FlexAlign, string> = {
     center: classes.alignCenter,
@@ -27,6 +27,7 @@ const directionClasses: Record<FlexDirection, string> = {
 };
 
 const gapClasses: Record<FlexGap, string> = {
+    0: classes.gap0,
     4: classes.gap4,
     8: classes.gap8,
     16: classes.gap16,
@@ -49,6 +50,7 @@ export interface FlexProps extends DivProps {
 
 export const Flex = (props: FlexProps) => {
     const {
+        style,
         className,
         children,
         align = 'center',
@@ -74,7 +76,12 @@ export const Flex = (props: FlexProps) => {
     ];
 
     return (
-        <div onClick={onClick} className={classNames(classes.Flex, mods, classesMapper)}>
+        <div
+            {...props}
+            style={style}
+            onClick={onClick}
+            className={classNames(classes.Flex, mods, classesMapper)}
+        >
             {children}
         </div>
     );

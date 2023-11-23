@@ -1,4 +1,7 @@
-import React, { InputHTMLAttributes, memo, useEffect, useRef } from 'react';
+import React, { InputHTMLAttributes, memo, useEffect, useRef, useState } from 'react';
+import { Icon } from 'shared/UI/Icon/Icon';
+import { HStack } from 'shared/UI/Stack';
+import { classNames } from 'shared/lib/classNames/classNames';
 import classes from './Input.module.scss';
 
 type HTMLInputProps = Omit<
@@ -12,11 +15,14 @@ interface InputProps extends HTMLInputProps {
     autoFocus?: boolean;
     readonly?: boolean;
     onChange?: (value: string) => void;
+    svg?: React.VFC<React.SVGProps<SVGSVGElement>>;
 }
 
 export const Input = memo((props: InputProps) => {
     const ref = useRef<HTMLInputElement>(null);
-    const { value, onChange, type = 'text', autoFocus, readonly, ...otherProps } = props;
+    const { svg, value, onChange, type = 'text', autoFocus, readonly, ...otherProps } = props;
+
+    const [isFocused, setIsFocused] = useState<boolean>(false);
 
     useEffect(() => {
         if (autoFocus) {
@@ -29,14 +35,24 @@ export const Input = memo((props: InputProps) => {
     };
 
     return (
-        <input
-            ref={ref}
-            value={value || ''}
-            onChange={onChangeHandler}
-            className={classes.Input}
-            type={type}
-            readOnly={readonly}
-            {...otherProps}
-        />
+        <HStack
+            maxW
+            className={classNames(classes.InputWrapper, {
+                [classes.focusedWrapper]: isFocused,
+            })}
+        >
+            {svg && <Icon className={classes.icon} Svg={svg} />}
+            <input
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                ref={ref}
+                value={value || ''}
+                onChange={onChangeHandler}
+                className={classes.Input}
+                type={type}
+                readOnly={readonly}
+                {...otherProps}
+            />
+        </HStack>
     );
 });

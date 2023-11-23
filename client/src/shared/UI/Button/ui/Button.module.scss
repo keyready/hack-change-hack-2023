@@ -1,22 +1,52 @@
 .Button {
     cursor: pointer;
-    padding: 5px 15px;
-    border-radius: 5px;
-    color: var(--inverted-primary-color);
-    background: var(--inverted-bg-color);
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    color: var(--inverted-secondary-color);
+    background: var(--sber-color);
     font: var(--font-m);
     transition: 200ms;
 
     &:hover {
-        background: var(--bg-color);
+        filter: brightness(1.1);
     }
 
     &:active {
-        outline: 1px solid var(--primary-color);
+        filter: brightness(1.1);
+        transform: scale(1.02);
     }
 
     &:focus {
-        box-shadow: 1px 1px 4px black;
+        filter: brightness(1.1);
+    }
+}
+
+.sber {
+    padding: 12px 40px;
+    border: none;
+    border-radius: 8px;
+    background: var(--sber-color);
+    font: var(--font-xs);
+    outline: none;
+
+    &:hover {
+        border: none;
+        color: var(--inverted-secondary-color);
+        background: var(--sber-color);
+        filter: brightness(0.9);
+        outline: none;
+    }
+
+    &:active {
+        outline: none;
+        box-shadow: 0 0 2px 8px #21A03826;
+    }
+
+    &:focus {
+        box-shadow: 0 0 2px 8px #21A03826;
+        outline: none;
     }
 }
 
@@ -39,18 +69,18 @@
 
 .outlined {
     background: none;
-    outline: 2px solid var(--navbar-bg);
+    outline: 1px solid var(--primary-color);
 
     &:hover {
-        background: var(--navbar-bg);
+        transform: scale(1.02);
     }
 
     &:active {
-        outline: 2px solid var(--primary-color);
+        transform: scale(1.02);
     }
 
     &:focus {
-        box-shadow: 1px 1px 4px black;
+        box-shadow: none;
     }
 }
 
@@ -61,6 +91,8 @@
     border-radius: 0;
     background: transparent;
     outline: none;
+    line-height: 0;
+    color: var(--primary-color);
 
     &:hover {
         background: none;

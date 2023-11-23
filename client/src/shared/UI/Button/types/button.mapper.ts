@@ -3,6 +3,7 @@ import classes from '../ui/Button.module.scss';
 
 export const variantsMapper: Record<buttonVariants, string> = {
     primary: classes.primary,
+    sber: classes.sber,
     inverted: classes.inverted,
     clear: classes.clear,
     danger: classes.danger,

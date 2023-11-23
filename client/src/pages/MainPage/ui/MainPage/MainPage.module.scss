@@ -1,16 +1,5 @@
-.messageCard {
-    width: 100%;
-    padding: 20px;
-    outline: 2px solid #7954f1;
-    border-radius: 10px;
-}
-
-.ownMessage {
-    outline: 2px solid #82DBF7;
-}
-
-.form {
-    width: 60%;
-    height: 40vh;
-    background: green;
+.cardsWrapper {
+    display: grid;
+    grid-template-columns: 1fr 2.3fr;
+    grid-gap: 30px
 }

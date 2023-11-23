@@ -41,6 +41,8 @@
         color: var(--primary-color);
         font: var(--font-l);
         font-weight: bold;
+        background-clip: text !important;
+        background-image: linear-gradient(var(--primary-gradient)) !important;
     }
 
     p {

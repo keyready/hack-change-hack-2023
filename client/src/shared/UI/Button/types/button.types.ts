@@ -1,5 +1,6 @@
 export type buttonVariants =
     | 'primary'
+    | 'sber'
     | 'inverted'
     | 'clear'
     | 'danger'

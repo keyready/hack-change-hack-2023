@@ -2,6 +2,8 @@
 @import 'reset';
 @import './variables/globals';
 @import './themes/normal';
+@import "primereact/resources/themes/lara-light-green/theme.css";
+@import "./variables/primereact-custom";
 
 .app,
 .app_modal,

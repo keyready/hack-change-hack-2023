@@ -34,7 +34,9 @@ export function buildPlugins({
             path: paths.dotenv,
         }),
 
-        // new CopyPlugin({}),
+        new CopyPlugin({
+            patterns: [{ from: paths.staticFrom, to: paths.staticTo }],
+        }),
 
         new CircularDependencyPlugin({
             exclude: /node_modules/,

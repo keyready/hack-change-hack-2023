@@ -1,0 +1,42 @@
+.GreenCard {
+    width: 100%;
+    padding: 30px 20px;
+    border-radius: 20px;
+    background: var(--green-card-bg);
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+.icon {
+    overflow: visible;
+}
+
+.list {
+    margin: 0;
+    padding: 0;
+    list-style-image: none;
+    list-style-position: inside;
+
+    p {
+        margin: 0;
+        display: inline;
+    }
+
+    li {
+        margin: 0 0 10px 0;
+        padding: 0;
+        list-style-image: none;
+        list-style-position: inside;
+    }
+}
+
+.icon {
+    fill: transparent;
+}
+
+.link {
+    color: var(--sber-color);
+}
+

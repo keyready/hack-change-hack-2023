@@ -1,16 +1,14 @@
 .Navbar {
     width: 100%;
     height: var(--navbar-heigth);
-    padding: 20px;
-    background: var(--card-bg);
+    padding: 30px 135px;
+    background: linear-gradient(94deg, #21A038 0%, #A0E720 100%);
 }
 
-.gigachat {
-    * {
-        margin: 0 !important;
-        color: transparent !important;
-        -webkit-background-clip: text !important;
-        background-clip: text !important;
-        background-image: linear-gradient(var(--primary-gradient)) !important;
-    }
+.btn {
+    padding: 12px 40px;
+}
+
+.text {
+    color: var(--inverted-secondary-color);
 }

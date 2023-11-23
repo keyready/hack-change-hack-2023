@@ -16,6 +16,8 @@ export default (env: BuildEnv) => {
             html: path.resolve(__dirname, 'public/index.html'),
             src: path.resolve(__dirname, 'src'),
             dotenv: path.resolve(__dirname, '../.env'),
+            staticFrom: path.resolve(__dirname, './public/static/images'),
+            staticTo: path.resolve(__dirname, './client-dist/static/images'),
         },
         isDev,
         port,

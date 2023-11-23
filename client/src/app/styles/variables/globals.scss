@@ -11,13 +11,12 @@
     }
 
     // s
-    --font-size-s: 18px;
-    --font-line-s: 26px;
+    --font-size-s: 20px;
+    --font-line-s: 28px;
     --font-s: var(--font-size-s) / var(--font-line-s) var(--font-family-main);
 
     h4 {
         font: var(--font-s);
-        font-weight: bold;
     }
 
     // m
@@ -27,7 +26,6 @@
 
     h3 {
         font: var(--font-m);
-        font-weight: bold;
     }
 
     // l
@@ -37,7 +35,6 @@
 
     h2 {
         font: var(--font-l);
-        font-weight: bold;
     }
 
     // xl
