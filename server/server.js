@@ -45,6 +45,7 @@ app.post('/api/login', (req, res) => {
     if (password === '123') {
         return res.status(200).json({
             jwtToken: 'test',
+            userRole: 'ADMIN',
         });
     }
 
@@ -63,7 +64,7 @@ app.get('/api/suggestion_card', async (req, res) =>
     ]),
 );
 
-app.ws('/chat', async (ws, req) => {
+app.ws('/ws/giga_chat', async (ws, req) => {
     console.log('connected');
     ws.on('message', async (event) => {
         const message = JSON.parse(event);
@@ -114,6 +115,149 @@ app.ws('/chat', async (ws, req) => {
             }),
         );
     });
+});
+
+app.ws('/ws/user_chat', async (ws, req) => {
+    console.log('user chat connected');
+
+    ws.on('message', async (event) => {
+        ws.send(
+            JSON.stringify({
+                sender: 'bot',
+                body: `<p>${JSON.parse(event).body}</p>`,
+                type: 'message',
+            }),
+        );
+    });
+});
+
+app.get('/api/fetch_borrowers', async (req, res) => {
+    res.status(200).json([
+        {
+            id: 1,
+            name: 'Иванов И.И.',
+            creditShortInfo: {
+                period: '3 года 6 месяцев',
+                amount: 100000,
+                interest_rate: 20.5,
+                status: 'NEW_REQUEST',
+            },
+        },
+        {
+            id: 2,
+            name: 'Петров П.П.',
+            creditShortInfo: {
+                period: '2 года 3 месяца',
+                amount: 200000,
+                interest_rate: 21.5,
+                status: 'ACTIVE_REQUEST',
+            },
+        },
+        {
+            id: 3,
+            name: 'Сидоров С.С.',
+            creditShortInfo: {
+                period: '1 год 1 месяц',
+                amount: 300000,
+                interest_rate: 22.5,
+                status: 'ACCEPTED_REQUEST',
+            },
+        },
+        {
+            id: 4,
+            name: 'Кузнецов К.К.',
+            creditShortInfo: {
+                period: '4 года 7 месяцев',
+                amount: 400000,
+                interest_rate: 23.5,
+                status: 'REJECTED_REQUEST',
+            },
+        },
+        {
+            id: 5,
+            name: 'Морозов М.М.',
+            creditShortInfo: {
+                period: '5 лет 2 месяца',
+                amount: 500000,
+                interest_rate: 24.5,
+                status: 'NEW_REQUEST',
+            },
+        },
+        {
+            id: 6,
+            name: 'Волков В.В.',
+            creditShortInfo: {
+                period: '6 лет 3 месяца',
+                amount: 600000,
+                interest_rate: 25.5,
+                status: 'ACTIVE_REQUEST',
+            },
+        },
+        {
+            id: 7,
+            name: 'Захаров З.З.',
+            creditShortInfo: {
+                period: '7 лет 4 месяца',
+                amount: 700000,
+                interest_rate: 26.5,
+                status: 'ACCEPTED_REQUEST',
+            },
+        },
+        {
+            id: 8,
+            name: 'Белов Б.Б.',
+            creditShortInfo: {
+                period: '8 лет 5 месяцев',
+                amount: 800000,
+                interest_rate: 27.5,
+                status: 'REJECTED_REQUEST',
+            },
+        },
+        {
+            id: 9,
+            name: 'Новиков Н.Н.',
+            creditShortInfo: {
+                period: '9 лет 6 месяцев',
+                amount: 900000,
+                interest_rate: 28.5,
+                status: 'NEW_REQUEST',
+            },
+        },
+        {
+            id: 10,
+            name: 'Тарасов Т.Т.',
+            creditShortInfo: {
+                period: '10 лет 7 месяцев',
+                amount: 1000000,
+                interest_rate: 29.5,
+                status: 'ACTIVE_REQUEST',
+            },
+        },
+    ]);
+});
+
+app.get('/api/fetch_borrower_chat/:id', async (req, res) => {
+    const { id } = req.params;
+
+    if (id !== -1) {
+        const messages = [];
+
+        for (let i = 0; i < id; i += 1) {
+            messages.push(
+                {
+                    body: 'Привет, как дела?',
+                    sender: 'user',
+                },
+                {
+                    body: 'Все норм, спасибо',
+                    sender: 'bot',
+                },
+            );
+        }
+
+        return res.status(200).json(messages);
+    }
+    return res.status(404);
 });
 
 app.listen(5000);

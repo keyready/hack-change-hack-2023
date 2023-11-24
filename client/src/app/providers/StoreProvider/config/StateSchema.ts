@@ -10,14 +10,16 @@ import { UISchema } from 'features/UI';
 import { rtkApi } from 'shared/api/rtkApi';
 import { AuthSchema } from 'pages/AuthPage';
 import { UserSchema } from 'entities/User';
+import { ConsultantPageTypes } from 'pages/ConsultantPage';
 
 export interface StateSchema {
     ui: UISchema;
     [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
+    user: UserSchema;
 
     // asynchronous reducers
     authPage?: AuthSchema;
-    user?: UserSchema;
+    consultantPage?: ConsultantPageTypes;
 }
 
 export type StateSchemaKey = keyof StateSchema;

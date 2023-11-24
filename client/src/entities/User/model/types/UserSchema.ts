@@ -1,7 +1,7 @@
 import { User } from './User';
 
 export interface UserSchema {
-    data?: User;
+    data: User;
     isLoading: boolean;
     error?: string;
 }

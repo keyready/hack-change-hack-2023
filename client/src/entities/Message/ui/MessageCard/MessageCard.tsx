@@ -18,7 +18,7 @@ export const MessageCard = memo((props: MessageCardProps) => {
                 className,
             ])}
         >
-            {type === 'user' ? <p>{message}</p> : Parser().parse(message)}
+            {type === 'user' ? <p className={classes.text}>{message}</p> : Parser().parse(message)}
         </div>
     );
 });

@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { sberIdLogin } from 'pages/AuthPage/model/services/sberIdLogin';
-import { User } from 'entities/User';
+import { sberIdLogin } from '../services/sberIdLogin';
+import { User } from '../types/User';
 import { UserSchema } from '../types/UserSchema';
 import { fetchUser } from '../services/fetchUser';
+import { UserRoles } from '../types/UserIntefaces';
 
 const initialState: UserSchema = {
-    data: undefined,
+    data: {} as User,
     isLoading: false,
     error: undefined,
 };
@@ -13,7 +14,11 @@ const initialState: UserSchema = {
 export const UserSlice = createSlice({
     name: 'UserSlice',
     initialState,
-    reducers: {},
+    reducers: {
+        setUserRole: (state, action: PayloadAction<UserRoles[]>) => {
+            state.data.role = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchUser.pending, (state) => {

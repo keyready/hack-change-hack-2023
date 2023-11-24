@@ -58,3 +58,12 @@ export interface CitizenShipInterface {
     // название страны
     country_name: string;
 }
+
+export type UserRoles = 'ADMIN' | 'MODERATOR' | 'USER';
+
+export interface CreditShort {
+    period: string;
+    amount: number;
+    interest_rate: number;
+    status: 'NEW_REQUEST' | 'ACTIVE_REQUEST' | 'ACCEPTED_REQUEST' | 'REJECTED_REQUEST';
+}

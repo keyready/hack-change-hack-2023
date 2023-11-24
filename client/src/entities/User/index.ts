@@ -1,4 +1,13 @@
 export type { User } from './model/types/User';
 export type { UserSchema } from './model/types/UserSchema';
 export { UserActions, UserReducer } from './model/slice/UserSlice';
-export { getUserData, getUserIsLoading, getUserError } from './model/selectors/UserSelectors';
+export { sberIdLogin } from './model/services/sberIdLogin';
+export type { UserRoles, CreditShort } from './model/types/UserIntefaces';
+export {
+    getUserRole,
+    getUserData,
+    getUserIsLoading,
+    getUserError,
+} from './model/selectors/UserSelectors';
+
+export { UserRowCard } from './ui/UserRowCard/UserRowCard';

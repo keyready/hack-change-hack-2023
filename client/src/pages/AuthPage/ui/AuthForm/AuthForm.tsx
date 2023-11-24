@@ -10,8 +10,8 @@ import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { AuthActions } from 'pages/AuthPage';
 import { useNavigate } from 'react-router-dom';
+import { sberIdLogin } from 'entities/User';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
-import { sberIdLogin } from 'pages/AuthPage/model/services/sberIdLogin';
 import { authLogin } from '../../model/services/authLogin';
 import {
     getAuthEmail,
@@ -52,6 +52,10 @@ export const AuthForm = memo((props: AuthFormProps) => {
             event.preventDefault();
 
             const result = await dispatch(authLogin({ email, password }));
+
+            if (result.meta.requestStatus === 'fulfilled') {
+                navigate(RoutePath.consultant);
+            }
         },
         [dispatch, email, password],
     );
