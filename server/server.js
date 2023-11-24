@@ -45,6 +45,7 @@ app.post('/api/login', (req, res) => {
     if (password === '123') {
         return res.status(200).json({
             jwtToken: 'test',
+            userRole: 'ADMIN',
         });
     }
 

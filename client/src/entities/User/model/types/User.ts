@@ -5,9 +5,12 @@ import {
     INNInterface,
     PassportInterface,
     SnilsInterface,
+    UserRoles,
 } from './UserIntefaces';
 
 export interface User {
+    role: UserRoles[];
+
     // просто какая-то строчка, хз
     sub?: string;
     // фамилия

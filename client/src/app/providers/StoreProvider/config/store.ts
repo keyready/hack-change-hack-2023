@@ -2,6 +2,7 @@ import { configureStore, ReducersMapObject } from '@reduxjs/toolkit';
 import { $api } from 'shared/api/api';
 import { UIReducer } from 'features/UI';
 import { rtkApi } from 'shared/api/rtkApi';
+import { UserReducer } from 'entities/User';
 import { createReducerManager } from './reducerManager';
 import { StateSchema } from './StateSchema';
 
@@ -12,6 +13,7 @@ export function CreateReduxStore(
     const rootReducers: ReducersMapObject<StateSchema> = {
         ...lazyReducers,
         ui: UIReducer,
+        user: UserReducer,
         [rtkApi.reducerPath]: rtkApi.reducer,
     };
 

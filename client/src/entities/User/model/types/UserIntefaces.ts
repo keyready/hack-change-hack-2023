@@ -58,3 +58,5 @@ export interface CitizenShipInterface {
     // название страны
     country_name: string;
 }
+
+export type UserRoles = 'ADMIN' | 'MODERATOR' | 'USER';

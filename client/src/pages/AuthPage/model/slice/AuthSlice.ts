@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { authLogin } from 'pages/AuthPage/model/services/authLogin';
 import Cookie from 'js-cookie';
 import { UserCookieJWT } from 'shared/const';
-import { AuthSchema } from '../types/AuthSchema';
+import { authLogin } from '../services/authLogin';
+import { AuthSchema, LoginResult } from '../types/AuthSchema';
 
 const initialState: AuthSchema = {
     email: '',
@@ -27,12 +27,12 @@ export const AuthSlice = createSlice({
                 state.error = undefined;
                 state.isLoading = true;
             })
-            .addCase(authLogin.fulfilled, (state, action: PayloadAction<string>) => {
+            .addCase(authLogin.fulfilled, (state, action: PayloadAction<LoginResult>) => {
                 state.isLoading = false;
 
-                Cookie.set(UserCookieJWT, action.payload);
+                Cookie.set(UserCookieJWT, action.payload.jwtToken);
 
-                state.jwtToken = action.payload;
+                state.jwtToken = action.payload.jwtToken;
             })
             .addCase(authLogin.rejected, (state, action) => {
                 state.isLoading = false;
