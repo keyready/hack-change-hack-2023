@@ -41,7 +41,7 @@ export const routerConfig: Record<AppRoutes, AppRoutesProps> = {
         path: RoutePath.consultant,
         element: <ConsultantPage />,
         authOnly: true,
-        requiredRoles: ['ADMIN', 'MODERATOR'],
+        // requiredRoles: ['ADMIN', 'MODERATOR'],
     },
 
     // last
