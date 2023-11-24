@@ -10,6 +10,7 @@ import { UISchema } from 'features/UI';
 import { rtkApi } from 'shared/api/rtkApi';
 import { AuthSchema } from 'pages/AuthPage';
 import { UserSchema } from 'entities/User';
+import { ConsultantPageTypes } from 'pages/ConsultantPage';
 
 export interface StateSchema {
     ui: UISchema;
@@ -18,6 +19,7 @@ export interface StateSchema {
 
     // asynchronous reducers
     authPage?: AuthSchema;
+    consultantPage?: ConsultantPageTypes;
 }
 
 export type StateSchemaKey = keyof StateSchema;

@@ -6,27 +6,33 @@ import EmptyDialogIcon from 'shared/assets/icons/chat-icon.svg';
 import FilledDialogIcon from 'shared/assets/icons/chat-filled-icon.svg';
 import { Icon } from 'shared/UI/Icon/Icon';
 import { Button } from 'shared/UI/Button';
+import { User } from 'entities/User';
 import classes from './UserRowCard.module.scss';
 
 interface UserRowCardProps {
     className?: string;
+    user: Partial<User>;
     isSelected?: boolean;
+    onChangeIsSelected: (user: Partial<User>) => void;
     isNewMessages?: boolean;
 }
 
 export const UserRowCard = memo((props: UserRowCardProps) => {
-    const { className, isSelected, isNewMessages } = props;
+    const { className, isSelected, isNewMessages, user, onChangeIsSelected } = props;
 
     return (
         <div
+            onClick={() => onChangeIsSelected(user)}
             className={classNames(classes.UserRowCard, { [classes.selectedRow]: isSelected }, [
                 className,
             ])}
         >
-            <p className={classes.name14px}>Низамидинов М.Ф.</p>
-            <p className={classes.text12px}>{(30000000).toLocaleString('ru-RU')} ₽</p>
-            <p className={classes.text12px}>10 лет 6 месяцев</p>
-            <p className={classes.text12px}>47.8%</p>
+            <p className={classes.name14px}>{user.name}</p>
+            <p className={classes.text12px}>
+                {user.creditShortInfo?.amount.toLocaleString('ru-RU')} ₽
+            </p>
+            <p className={classes.text12px}>{user.creditShortInfo?.period}</p>
+            <p className={classes.text12px}>{user.creditShortInfo?.interest_rate} %</p>
             <Button variant="clear">
                 <Icon Svg={CrossIcon} />
             </Button>

@@ -1,8 +1,11 @@
-import { UserRoles } from './UserIntefaces';
+import { UserRoles, CreditShort } from './UserIntefaces';
 
 export interface User {
+    id: number;
+    name: string;
     role: UserRoles[];
     email: string;
     password: string;
-    name: string;
+
+    creditShortInfo: CreditShort;
 }

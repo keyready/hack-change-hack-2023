@@ -3,6 +3,8 @@ import { memo, useCallback, useEffect, useState } from 'react';
 import { VStack } from 'shared/UI/Stack';
 import { Message } from 'entities/Message';
 import useWebSocket from 'react-use-websocket';
+import { User } from 'entities/User';
+import { useBorrowerChat } from 'features/UserChat/api/fetchUserDialogApi';
 import { UserChatDialogArea } from '../UserChatDialogArea/UserChatDialogArea';
 import { UserChatHeader } from '../UserChatHeader/UserChatHeader';
 import { UserChatMessageArea } from '../UserChatMessageArea/UserChatMessageArea';
@@ -10,12 +12,17 @@ import classes from './UserChat.module.scss';
 
 interface UserChatProps {
     className?: string;
+    user?: Partial<User>;
 }
 
 export const UserChat = memo((props: UserChatProps) => {
-    const { className } = props;
+    const { className, user } = props;
 
     const { lastMessage, sendMessage } = useWebSocket('ws://localhost:5000/ws/user_chat');
+
+    const { data: userMessages, isLoading: isUserMessagesLoading } = useBorrowerChat(
+        user?.id || -1,
+    );
 
     const [message, setMessage] = useState<string>('');
     const [messages, setMessages] = useState<Message[]>([]);
@@ -27,11 +34,12 @@ export const UserChat = memo((props: UserChatProps) => {
             JSON.stringify({
                 type: 'message',
                 body: message,
+                userId: user?.id || -1,
                 sender: 'user',
             }),
         );
         setMessages((prevState) => [...prevState, { body: message, sender: 'user' }]);
-    }, [lastMessage, message, sendMessage]);
+    }, [message, sendMessage, user]);
 
     useEffect(() => {
         if (lastMessage?.data) {
@@ -39,10 +47,22 @@ export const UserChat = memo((props: UserChatProps) => {
         }
     }, [lastMessage]);
 
+    useEffect(() => {
+        if (userMessages?.length) setMessages(userMessages);
+    }, [userMessages]);
+
+    if (!user) {
+        return (
+            <VStack gap="0" maxW className={classNames(classes.UserChat, {}, [className])}>
+                <h2>Выберите диалог, чтобы продолжить</h2>
+            </VStack>
+        );
+    }
+
     return (
         <VStack gap="0" maxW className={classNames(classes.UserChat, {}, [className])}>
             <UserChatHeader
-                name="Низамидинов М.Ф."
+                name={user?.name || ''}
                 onAccept={handleAcceptRequest}
                 onReject={handleRejectRequest}
             />
