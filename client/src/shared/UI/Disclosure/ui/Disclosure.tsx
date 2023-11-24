@@ -21,7 +21,7 @@ export const Disclosure = memo((props: DisclosureProps) => {
     const { content, title, isNewRequests, type = 1, defaultOpened } = props;
 
     return (
-        <HDisclosure as={VStack} maxW defaultOpen={defaultOpened}>
+        <HDisclosure as={VStack} maxW>
             {({ open }) => (
                 <>
                     <HDisclosure.Button

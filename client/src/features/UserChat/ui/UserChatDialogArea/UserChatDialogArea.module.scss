@@ -1,0 +1,17 @@
+.UserChatDialogArea {
+    height: 50vh;
+    width: 100%;
+    padding: 10px 5px;
+    outline: 1px solid #767676;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.message {
+    outline: 1px solid #B7B7B7;
+    max-width: 60%;
+    text-align: left;
+}

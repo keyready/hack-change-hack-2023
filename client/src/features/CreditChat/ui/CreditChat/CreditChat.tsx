@@ -17,7 +17,7 @@ interface CreditChatProps {
 export const CreditChat = memo((props: CreditChatProps) => {
     const { className } = props;
 
-    const { sendMessage, lastMessage } = useWebSocket('ws://localhost:5000/chat');
+    const { sendMessage, lastMessage } = useWebSocket('ws://localhost:5000/ws/giga_chat');
 
     const [inputQuery, setInputQuery] = useState<string>('');
     const [focus, setFocus] = useState<boolean>(false);
@@ -87,12 +87,10 @@ export const CreditChat = memo((props: CreditChatProps) => {
             )}
 
             {!focus && (
-                <VStack maxW justify="center" gap="16"
-align="center">
+                <VStack maxW justify="center" gap="16" align="center">
                     <h1>Кредит на любые цели</h1>
 
-                    <HStack maxW justify="center" gap="8"
-align="center">
+                    <HStack maxW justify="center" gap="8" align="center">
                         <div className={classes.btn}>Заглушка кнопки</div>
                         <div className={classes.btn}>Заглушка кнопки</div>
                     </HStack>

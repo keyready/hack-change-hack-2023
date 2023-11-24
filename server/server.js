@@ -64,7 +64,7 @@ app.get('/api/suggestion_card', async (req, res) =>
     ]),
 );
 
-app.ws('/chat', async (ws, req) => {
+app.ws('/ws/giga_chat', async (ws, req) => {
     console.log('connected');
     ws.on('message', async (event) => {
         const message = JSON.parse(event);
@@ -112,6 +112,20 @@ app.ws('/chat', async (ws, req) => {
                 type: 'disconnection',
                 username: 'system',
                 message: `Пользователь вышел из чата`,
+            }),
+        );
+    });
+});
+
+app.ws('/ws/user_chat', async (ws, req) => {
+    console.log('user chat connected');
+
+    ws.on('message', async (event) => {
+        ws.send(
+            JSON.stringify({
+                sender: 'bot',
+                body: `<p>${JSON.parse(event).body}</p>`,
+                type: 'message',
             }),
         );
     });

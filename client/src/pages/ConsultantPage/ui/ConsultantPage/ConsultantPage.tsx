@@ -41,8 +41,6 @@ const ConsultantPage = memo((props: ConsultantPageProps) => {
 
     return (
         <Page className={classNames(classes.ConsultantPage, {}, [className])}>
-            <h1>Страница консультанта</h1>
-
             <HStack maxW gap="32" align="start">
                 <VStack gap="16" className={classes.disclosureWrapper}>
                     {titles.map((title, index) => (

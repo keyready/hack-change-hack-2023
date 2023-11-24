@@ -1,1 +1,1 @@
-export { UserChat } from './ui/UserChat';
+export { UserChat } from './ui/UserChat/UserChat';

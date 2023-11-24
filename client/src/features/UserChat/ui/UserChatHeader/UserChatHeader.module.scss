@@ -1,0 +1,56 @@
+.UserChatHeader {
+    padding: 15px 30px;
+    background: var(--sber-color);
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    outline: 1px solid var(--sber-color);
+}
+
+.button {
+    padding: 7px 15px;
+    border-radius: 4px;
+}
+
+.outlinedButton {
+    padding: 7px 15px;
+    border-radius: 4px;
+    outline: 1px solid #B7B7B7;
+
+    p {
+        color: white;
+    }
+}
+
+.title {
+    color: white;
+}
+
+.acceptButton {
+    background: white;
+
+    p {
+        color: black;
+    }
+}
+
+.rejectButton {
+    background: var(--sber-red-color);
+
+    p {
+        color: white;
+    }
+}
+
+.acceptIcon {
+    width: 15px;
+    height: 15px;
+    color: var(--sber-color);
+}
+
+.rejectIcon {
+    width: 15px;
+    height: 15px;
+    color: white;
+}
+
+
