@@ -1,0 +1,34 @@
+.UserRowCard {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 5fr 2fr 3fr 1fr 0.5fr 0.5fr 0.5fr;
+    justify-items: start;
+    grid-gap: 10px;
+    transition: 200ms;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 8px;
+
+    &:hover {
+        background: #F1F0F0;
+    }
+}
+
+.selectedRow {
+    background: var(--sber-color);
+
+    &:hover {
+        background: var(--sber-color);
+    }
+}
+
+.name14px {
+    font-size: 14px !important;
+    color: black !important;
+    font-weight: bold !important;
+}
+
+.text12px {
+    font-size: 12px !important;
+    color: black !important;
+}

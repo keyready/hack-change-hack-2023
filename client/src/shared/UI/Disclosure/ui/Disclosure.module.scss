@@ -57,5 +57,38 @@
 }
 
 .content {
+    width: 100%;
     padding: 10px 20px;
+}
+
+.enter {
+    transition: 150ms;
+}
+
+.enterFrom {
+    width: 100%;
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+.enterTo {
+    width: 100%;
+    opacity: 1;
+    transform: translateY(0)
+}
+
+.leave {
+    transition: 150ms;
+}
+
+.leaveFrom {
+    width: 100%;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.leaveTo {
+    width: 100%;
+    opacity: 0;
+    transform: translateY(-30px);
 }

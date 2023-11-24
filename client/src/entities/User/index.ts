@@ -9,3 +9,5 @@ export {
     getUserIsLoading,
     getUserError,
 } from './model/selectors/UserSelectors';
+
+export { UserRowCard } from './ui/UserRowCard/UserRowCard';
