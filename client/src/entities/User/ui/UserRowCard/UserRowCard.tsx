@@ -4,7 +4,6 @@ import CrossIcon from 'shared/assets/icons/red-cross.svg';
 import GalkaIcon from 'shared/assets/icons/green-galka.svg';
 import EmptyDialogIcon from 'shared/assets/icons/chat-icon.svg';
 import FilledDialogIcon from 'shared/assets/icons/chat-filled-icon.svg';
-
 import { Icon } from 'shared/UI/Icon/Icon';
 import { Button } from 'shared/UI/Button';
 import classes from './UserRowCard.module.scss';

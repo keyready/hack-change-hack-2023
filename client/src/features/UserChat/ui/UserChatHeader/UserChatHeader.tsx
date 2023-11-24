@@ -22,7 +22,7 @@ export const UserChatHeader = memo((props: UserChatHeaderProps) => {
             maxW
             className={classNames(classes.UserChatHeader, {}, [className])}
         >
-            <p className={classes.title}>{name}</p>
+            <h3 className={classes.title}>{name}</h3>
 
             <HStack>
                 <Button onClick={onDocumentClick} className={classes.outlinedButton}>
