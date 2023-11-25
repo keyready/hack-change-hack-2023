@@ -83,6 +83,7 @@ export const CreditChat = memo((props: CreditChatProps) => {
             setInputQuery('');
 
             dispatch(borrowerSignup({ email, password: inputQuery }));
+            setIsRegisterProcess(0);
             return;
         }
 

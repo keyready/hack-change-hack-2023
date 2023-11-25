@@ -57,7 +57,7 @@ export const AuthForm = memo((props: AuthFormProps) => {
                 navigate(RoutePath.consultant);
             }
         },
-        [dispatch, email, password],
+        [dispatch, email, navigate, password],
     );
     const handleSberLoginClick = useCallback(async () => {
         const result = await dispatch(sberIdLogin());
