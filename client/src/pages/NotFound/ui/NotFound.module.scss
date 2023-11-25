@@ -1,0 +1,24 @@
+.NotFound {
+    max-height: calc(100vh - var(--navbar-heigth));
+    overflow-y: hidden;
+    background: linear-gradient(120deg, #21A038 -1.27%, #A0E720 103.13%);
+}
+
+.t404 {
+    color: white;
+    font-size: 128px !important;
+    line-height: normal !important;
+}
+
+p {
+    color: white;
+    font-size: 20px !important;
+}
+
+.te404 {
+    color: white;
+    font-size: 48px !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    line-height: normal !important;
+}
