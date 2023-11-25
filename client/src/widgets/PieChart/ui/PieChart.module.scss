@@ -1,0 +1,14 @@
+.PieChartWrapper {
+    width: 100%;
+}
+
+.piechart {
+    position: relative;
+}
+
+.text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -6,6 +6,8 @@ import { Message, MessageCard } from 'entities/Message';
 import CloseIcon from 'shared/assets/icons/close-btn-icon.svg';
 import { Icon } from 'shared/UI/Icon/Icon';
 import { Button } from 'shared/UI/Button';
+import { borrowerSignup } from 'entities/Borrower';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { prepareWSMessage } from '../../utils/PrepareWSMessage';
 import { CreditChatInput } from '../CreditChatInput/CreditChatInput';
 import classes from './CreditChat.module.scss';
@@ -19,10 +21,15 @@ export const CreditChat = memo((props: CreditChatProps) => {
 
     const { sendMessage, lastMessage } = useWebSocket('ws://localhost:5000/ws/giga_chat');
 
+    const dispatch = useAppDispatch();
+
+    const [isRegisterProcess, setIsRegisterProcess] = useState<number>(0);
+
+    const [email, setEmail] = useState<string>('');
+
     const [inputQuery, setInputQuery] = useState<string>('');
     const [focus, setFocus] = useState<boolean>(false);
     const [height, setHeight] = useState<number>(40);
-    const [i, setI] = useState<number>(0);
     const [messages, setMessages] = useState<Message[]>([]);
 
     useEffect(() => {
@@ -34,24 +41,72 @@ export const CreditChat = memo((props: CreditChatProps) => {
                 clearInterval(intervalId);
             } else {
                 setHeight((prevValue) => prevValue + 5);
-                setI((prevI) => prevI + 1);
             }
         }, 5);
         return () => clearInterval(intervalId);
-    }, [focus, height, i]);
+    }, [focus, height]);
 
     const handleMessageSend = useCallback(() => {
+        if (isRegisterProcess === 1) {
+            if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(inputQuery)) {
+                setIsRegisterProcess(2);
+                setMessages((prevState) => [
+                    ...prevState,
+                    { body: inputQuery, sender: 'user' },
+                    { body: 'А теперь придумайте пароль', sender: 'bot' },
+                ]);
+                setEmail(inputQuery);
+                setInputQuery('');
+            } else {
+                setMessages((prevState) => [
+                    ...prevState,
+                    { body: inputQuery, sender: 'user' },
+                    { body: 'Это не похоже на почту, попробуйте еще раз', sender: 'bot' },
+                ]);
+            }
+            setInputQuery('');
+            return;
+        }
+        if (isRegisterProcess === 2) {
+            setMessages((prevState) => [
+                ...prevState,
+                { body: inputQuery, sender: 'user' },
+                {
+                    body:
+                        'Теперь проверьте почту. ' +
+                        'Я отправил Вам письмо для ' +
+                        'подтверждения адреса. Когда ' +
+                        'закончите, возвращайтесь сюда!',
+                    sender: 'bot',
+                },
+            ]);
+            setInputQuery('');
+
+            dispatch(borrowerSignup({ email, password: inputQuery }));
+            return;
+        }
+
         sendMessage(prepareWSMessage(inputQuery, 'message'));
         setMessages((prevState) => [...prevState, { body: inputQuery, sender: 'user' }]);
         setInputQuery('');
 
         const messagesArea = document.querySelector('#messagesAreaRef');
         if (messagesArea) messagesArea.scrollTo(0, messagesArea.scrollHeight);
-    }, [inputQuery, sendMessage]);
+    }, [dispatch, email, inputQuery, isRegisterProcess, sendMessage]);
 
     useEffect(() => {
         if (lastMessage?.data) {
-            const { body, sender } = JSON.parse(lastMessage.data);
+            const { body, sender, type } = JSON.parse(lastMessage.data);
+
+            if (type === 'register_start') {
+                setIsRegisterProcess(1);
+                setMessages((prevState) => [
+                    ...prevState,
+                    { body: 'Отлично! Введите Вашу почту', sender: 'bot' },
+                ]);
+                setInputQuery('');
+                return;
+            }
 
             setMessages((prevState) => [...prevState, { body, sender }]);
         }
@@ -106,7 +161,11 @@ export const CreditChat = memo((props: CreditChatProps) => {
                     align="start"
                 >
                     {messages.map((message) => (
-                        <MessageCard message={message.body} type={message.sender} />
+                        <MessageCard
+                            key={message.body}
+                            message={message.body}
+                            type={message.sender}
+                        />
                     ))}
                 </VStack>
             ) : (

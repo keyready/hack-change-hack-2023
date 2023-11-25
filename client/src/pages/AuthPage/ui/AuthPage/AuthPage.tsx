@@ -21,8 +21,7 @@ const AuthPage = memo((props: AuthPageProps) => {
     return (
         <DynamicModuleLoader reducers={{ authPage: AuthReducer }}>
             <Page className={classNames(classes.AuthPage, {}, [className])}>
-                <HStack className={classes.wrapper} maxW gap="0"
-justify="between">
+                <HStack className={classes.wrapper} maxW gap="0" justify="between">
                     <AuthForm />
                     <div className={classes.img} />
                 </HStack>

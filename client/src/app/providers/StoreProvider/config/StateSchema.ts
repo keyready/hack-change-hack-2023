@@ -11,6 +11,8 @@ import { rtkApi } from 'shared/api/rtkApi';
 import { AuthSchema } from 'pages/AuthPage';
 import { UserSchema } from 'entities/User';
 import { ConsultantPageTypes } from 'pages/ConsultantPage';
+import { UnderwriterSchema } from 'entities/Underwriter';
+import { BorrowerSchema } from 'entities/Borrower';
 
 export interface StateSchema {
     ui: UISchema;
@@ -18,6 +20,8 @@ export interface StateSchema {
     user: UserSchema;
 
     // asynchronous reducers
+    underwriter?: UnderwriterSchema;
+    borrower?: BorrowerSchema;
     authPage?: AuthSchema;
     consultantPage?: ConsultantPageTypes;
 }

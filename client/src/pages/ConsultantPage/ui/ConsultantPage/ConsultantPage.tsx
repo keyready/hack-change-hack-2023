@@ -8,6 +8,7 @@ import { User, UserRowCard } from 'entities/User';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { DynamicModuleLoader } from 'shared/lib/DynamicModuleLoader/DynamicModuleLoader';
+import { UnderwriterPieChart } from 'entities/Underwriter';
 import {
     ConsultantPageActions,
     ConsultantPageReducer,
@@ -104,6 +105,8 @@ const ConsultantPage = memo((props: ConsultantPageProps) => {
         <DynamicModuleLoader reducers={{ consultantPage: ConsultantPageReducer }}>
             <Page className={classNames(classes.ConsultantPage, {}, [className])}>
                 <HStack maxW gap="32" align="start">
+                    {/* TODO может быть когда-нибудь сделать диаграмму */}
+                    {/* <UnderwriterPieChart /> */}
                     <VStack gap="16" className={classes.disclosureWrapper}>
                         {titles.map((title, index) => (
                             <Disclosure
