@@ -100,7 +100,6 @@ app.ws('/ws/giga_chat', async (ws, req) => {
         switch (message.type) {
             case 'message':
                 if (message.body === 'рега') {
-                    console.log('начал регистрацию');
                     ws.send(
                         JSON.stringify({
                             type: 'register_start',
