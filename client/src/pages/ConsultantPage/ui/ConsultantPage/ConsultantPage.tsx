@@ -1,6 +1,6 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Page } from 'widgets/Page/Page';
-import { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { memo, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { Disclosure } from 'shared/UI/Disclosure';
 import { HStack, VStack } from 'shared/UI/Stack';
 import { UserChat } from 'features/UserChat';
@@ -9,6 +9,7 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { DynamicModuleLoader } from 'shared/lib/DynamicModuleLoader/DynamicModuleLoader';
 import { UnderwriterPieChart } from 'entities/Underwriter';
+import { Skeleton } from 'primereact/skeleton';
 import {
     ConsultantPageActions,
     ConsultantPageReducer,
@@ -21,6 +22,30 @@ interface ConsultantPageProps {
     className?: string;
 }
 
+const ContentWrapper = memo(({ children }: { children: ReactNode }) => {
+    const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    if (windowWidth > 1500) {
+        return (
+            <HStack maxW gap="32" align="start">
+                {children}
+            </HStack>
+        );
+    }
+
+    return (
+        <VStack maxW gap="32" align="start">
+            {children}
+        </VStack>
+    );
+});
+
 const ConsultantPage = memo((props: ConsultantPageProps) => {
     const { className } = props;
 
@@ -30,7 +55,7 @@ const ConsultantPage = memo((props: ConsultantPageProps) => {
 
     const dispatch = useAppDispatch();
 
-    const { data: borrowers, isLoading: isBorrowersLoading } = useBorrowers();
+    const { data: borrowers, isFetching: isBorrowersLoading } = useBorrowers();
 
     const selectedChat = useSelector(getSelectedChat);
 
@@ -101,10 +126,29 @@ const ConsultantPage = memo((props: ConsultantPageProps) => {
 
     const isNewRequests = useMemo(() => [true, false, true, true], []);
 
+    if (isBorrowersLoading) {
+        return (
+            <DynamicModuleLoader reducers={{ consultantPage: ConsultantPageReducer }}>
+                <Page className={classNames(classes.ConsultantPage, {}, [className])}>
+                    <HStack maxW align="start">
+                        <VStack maxW>
+                            <Skeleton width="100%" height="70px" />
+                            <Skeleton width="100%" height="70px" />
+                            <Skeleton width="100%" height="200px" />
+                            <Skeleton width="100%" height="70px" />
+                            <Skeleton width="100%" height="70px" />
+                        </VStack>
+                        <Skeleton width="100%" height="50vh" />
+                    </HStack>
+                </Page>
+            </DynamicModuleLoader>
+        );
+    }
+
     return (
         <DynamicModuleLoader reducers={{ consultantPage: ConsultantPageReducer }}>
             <Page className={classNames(classes.ConsultantPage, {}, [className])}>
-                <HStack maxW gap="32" align="start">
+                <ContentWrapper>
                     {/* TODO может быть когда-нибудь сделать диаграмму */}
                     {/* <UnderwriterPieChart /> */}
                     <VStack gap="16" className={classes.disclosureWrapper}>
@@ -119,7 +163,7 @@ const ConsultantPage = memo((props: ConsultantPageProps) => {
                         ))}
                     </VStack>
                     <UserChat user={selectedChat} className={classes.chat} />
-                </HStack>
+                </ContentWrapper>
             </Page>
         </DynamicModuleLoader>
     );

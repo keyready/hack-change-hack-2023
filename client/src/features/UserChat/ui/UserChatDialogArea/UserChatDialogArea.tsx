@@ -2,15 +2,17 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { memo, UIEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Message, MessageCard } from 'entities/Message';
 import { VStack } from 'shared/UI/Stack';
+import { Skeleton } from 'primereact/skeleton';
 import classes from './UserChatDialogArea.module.scss';
 
 interface UserChatDialogAreaProps {
     className?: string;
     messages: Message[];
+    isLoading?: boolean;
 }
 
 export const UserChatDialogArea = memo((props: UserChatDialogAreaProps) => {
-    const { className, messages } = props;
+    const { className, messages, isLoading } = props;
 
     const messagesArea = document.querySelector('#chatMessagesArea');
 
@@ -33,6 +35,46 @@ export const UserChatDialogArea = memo((props: UserChatDialogAreaProps) => {
         }
     }, []);
 
+    const content = useMemo(() => {
+        if (isLoading) {
+            return (
+                <VStack maxW gap="8">
+                    {new Array(9).fill(0).map((_, index) => (
+                        <Skeleton
+                            key={index}
+                            className={classNames(classes.leftSkeleton, {
+                                [classes.rightSkeleton]: index % 2 === 0,
+                                [classes.tallSkeleton]: index % 3 === 0,
+                            })}
+                            width="40%"
+                            height="50px"
+                        />
+                    ))}
+                </VStack>
+            );
+        }
+
+        if (!isLoading && !messages.length) {
+            return (
+                <>
+                    <h2>Ничего не найдено...</h2>
+                </>
+            );
+        }
+        return (
+            <>
+                {messages.map((message, index) => (
+                    <MessageCard
+                        className={classes.message}
+                        message={message.body}
+                        type={message.sender}
+                        key={index}
+                    />
+                ))}
+            </>
+        );
+    }, [isLoading, messages]);
+
     return (
         <VStack
             maxW
@@ -44,21 +86,7 @@ export const UserChatDialogArea = memo((props: UserChatDialogAreaProps) => {
             className={classNames(classes.UserChatDialogArea, {}, [className])}
             gap="16"
         >
-            {messages.length ? (
-                messages.map((message, index) => (
-                    <MessageCard
-                        className={classes.message}
-                        message={message.body}
-                        type={message.sender}
-                        key={index}
-                    />
-                ))
-            ) : (
-                <VStack maxW justify="center" align="center">
-                    <h3>Тут пока ничего нет...</h3>
-                    <p>Начните диалог!</p>
-                </VStack>
-            )}
+            {content}
         </VStack>
     );
 });

@@ -23,7 +23,7 @@ export const UserChat = memo((props: UserChatProps) => {
 
     const { lastMessage, sendMessage } = useWebSocket('ws://localhost:5000/ws/user_chat');
 
-    const { data: userMessages, isLoading: isUserMessagesLoading } = useBorrowerChat(
+    const { data: userMessages, isFetching: isUserMessagesLoading } = useBorrowerChat(
         user?.id || -1,
     );
 
@@ -43,7 +43,7 @@ export const UserChat = memo((props: UserChatProps) => {
             }),
         );
         setMessages((prevState) => [...prevState, { body: message, sender: 'user' }]);
-    }, [message, sendMessage, user]);
+    }, [message, sendMessage, user?.id, userId]);
 
     useEffect(() => {
         if (lastMessage?.data) {
@@ -70,7 +70,7 @@ export const UserChat = memo((props: UserChatProps) => {
                 onAccept={handleAcceptRequest}
                 onReject={handleRejectRequest}
             />
-            <UserChatDialogArea messages={messages} />
+            <UserChatDialogArea isLoading={isUserMessagesLoading} messages={messages} />
             <UserChatMessageArea
                 onMessageSent={handleSendMessage}
                 value={message}
