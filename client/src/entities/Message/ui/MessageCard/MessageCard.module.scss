@@ -1,0 +1,20 @@
+.MessageCard {
+    padding: 10px 20px;
+    border-radius: 20px 20px 4px;
+    background: var(--inverted-secondary-color);
+    max-width: 640px;
+    align-self: end;
+
+    ul, li {
+        list-style: circle inside;
+    }
+}
+
+.botMessage {
+    border-radius: 20px 20px 20px 4px;
+    align-self: start;
+}
+
+.text {
+    color: black;
+}

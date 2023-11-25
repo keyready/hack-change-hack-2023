@@ -1,0 +1,34 @@
+.MailInput {
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: #FFF;
+    gap: 10px;
+    transition: 200ms;
+    outline: 1px solid var(--secondary-color);;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    color: var(--secondary-color);;
+    transition: 200ms;
+    fill: transparent;
+}
+
+.focusedWrapper {
+    outline: 1.5px solid var(--primary-color);
+    box-shadow: 0 0 2px 8px #21A03826;
+
+    .icon {
+        color: var(--primary-color);
+    }
+}
+
+.wrong {
+    outline: 1.5px solid red;
+    box-shadow: none;
+
+    .icon {
+        color: red;
+    }
+}

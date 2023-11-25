@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+          rel="stylesheet">
+
+    <title>Подтверждение регистрации</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 30px;
+            background: white;
+        }
+
+        .section {
+            background: linear-gradient(94deg, #21A038 0%, #A0E720 100%);
+            width: 100%;
+            min-height: 750px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .title {
+            color: white;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+
+        .text {
+            color: white;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
+
+        .code_section {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .digit {
+            display: flex;
+            padding: 11px 13px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 4px 10px -5px rgba(118, 138, 159, 0.10);
+            font-size: 24px;
+            color: black;
+            text-align: center;
+            font-family: Ubuntu, sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            text-transform: uppercase;
+        }
+
+        .button {
+            padding: 10px 40px;
+            border-radius: 8px;
+            background: white;
+            width: 450px;
+            cursor: pointer;
+            border: none;
+            transition: 200ms;
+        }
+
+        .button:hover {
+            background: #ddd;
+            transform: scale(1.02);
+        }
+
+        a.acceptBtn:link,
+        a.acceptBtn:visited {
+            text-align: center;
+            color: #1A1D21;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            text-decoration: none;
+        }
+
+        .text.small {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <img src="./static/sber-logo-header.svg" alt="Лого сбера"/>
+</header>
+<div class="section">
+    <h1 class="title">Здравствуйте, {{ name }}}!</h1>
+    <img src="./static/sbertyan-1.webp" alt="Сбертян"/>
+    <div>
+        <p class="text">Подтвердите ваш email для начала работы</p>
+        <p class="text">Код для подтверждения регистрации:</p>
+    </div>
+
+    <div class="code_section">
+        <div class="digit">1</div>
+        <div class="digit">3</div>
+        <div class="digit">3</div>
+        <div class="digit">7</div>
+    </div>
+
+    <div>
+        <p class="text">Ваши регистрационные данные:</p>
+        <p class="text">E-mail: {{ email }}</p>
+        <p class="text">Телефон: {{ phone_number }}</p>
+    </div>
+
+    <button class="button">
+        <a target="_blank" href='{{ accept_link }}' class="acceptBtn">
+            Начать!
+        </a>
+    </button>
+
+    <div>
+        <p class="text small">Если вы считаете, что данное сообщение послано вам ошибочно, просто</p>
+        <p class="text small"> проигнорируйте его и все данные будут автоматически удалены.</p>
+    </div>
+</div>
+</body>
+</html>

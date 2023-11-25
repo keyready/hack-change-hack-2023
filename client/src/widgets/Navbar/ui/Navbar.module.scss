@@ -1,0 +1,14 @@
+.Navbar {
+    width: 100%;
+    height: var(--navbar-heigth);
+    padding: 30px 135px;
+    background: linear-gradient(94deg, #21A038 0%, #A0E720 100%);
+}
+
+.btn {
+    padding: 12px 40px;
+}
+
+.text {
+    color: var(--inverted-secondary-color);
+}

@@ -1,0 +1,96 @@
+.Disclosure {
+    width: 100%;
+}
+
+.header {
+    cursor: pointer;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    outline: 1px solid #B7B7B7;
+}
+
+.blue {
+    background: #0087CD;
+    outline: none;
+}
+
+.green {
+    background: var(--sber-color);
+    outline: none;
+}
+
+.red {
+    background: #F06;
+    outline: none;
+}
+
+
+.title {
+    text-align: left;
+}
+
+.icon {
+    overflow: visible;
+
+}
+
+.circle {
+    overflow: visible;
+}
+
+.arrow {
+    width: 30px;
+    height: 30px;
+    color: var(--sber-color);
+    transition: 200ms;
+}
+
+.arrowInverted {
+    color: white;
+}
+
+.openedIcon {
+    transform: rotate(-180deg);
+}
+
+.content {
+    width: 100%;
+    padding: 10px 20px;
+}
+
+.enter {
+    width: 100%;
+    transition: 150ms;
+}
+
+.enterFrom {
+    width: 100%;
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+.enterTo {
+    width: 100%;
+    opacity: 1;
+    transform: translateY(0)
+}
+
+.leave {
+    width: 100%;
+    transition: 150ms;
+}
+
+.leaveFrom {
+    width: 100%;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.leaveTo {
+    width: 100%;
+    opacity: 0;
+    transform: translateY(-30px);
+}

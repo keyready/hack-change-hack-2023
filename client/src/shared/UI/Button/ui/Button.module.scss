@@ -1,0 +1,120 @@
+.Button {
+    cursor: pointer;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    color: var(--inverted-secondary-color);
+    background: var(--sber-color);
+    font: var(--font-m);
+    transition: 200ms;
+    outline: none;
+
+    &:hover {
+        filter: brightness(1.1);
+    }
+
+    &:active {
+        filter: brightness(1.1);
+        transform: scale(1.02);
+    }
+
+    &:focus {
+        filter: brightness(1.1);
+    }
+}
+
+.sber {
+    padding: 12px 40px;
+    border: none;
+    border-radius: 8px;
+    background: var(--sber-color);
+    font: var(--font-xs);
+    outline: none;
+
+    &:hover {
+        border: none;
+        color: var(--inverted-secondary-color);
+        background: var(--sber-color);
+        filter: brightness(0.9);
+        outline: none;
+    }
+
+    &:active {
+        outline: none;
+        box-shadow: 0 0 2px 8px #21A03826;
+    }
+
+    &:focus {
+        box-shadow: 0 0 2px 8px #21A03826;
+        outline: none;
+    }
+}
+
+.inverted {
+    color: var(--primary-color);
+    background: var(--bg-color);
+
+    &:active {
+        outline: 1px solid var(--primary-color);
+    }
+
+    &:hover {
+        filter: grayscale(0.6);
+    }
+
+    &:focus {
+        box-shadow: 1px 1px 4px black;
+    }
+}
+
+.outlined {
+    background: none;
+    outline: 1px solid var(--primary-color);
+
+    &:hover {
+        transform: scale(1.02);
+    }
+
+    &:active {
+        transform: scale(1.02);
+    }
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+.clear {
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    color: var(--primary-color);
+    background: transparent;
+    outline: none;
+    line-height: 0;
+
+    &:hover {
+        background: none;
+        transform: scale(1.1);
+    }
+
+    &:active {
+        outline: none;
+    }
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+.disabled {
+    cursor: not-allowed;
+    background: var(--card-bg);
+    outline: 2px solid var(--primary-color);
+
+    &:hover {
+        background: var(--card-bg);
+        outline: 2px solid var(--primary-color);
+    }
+}

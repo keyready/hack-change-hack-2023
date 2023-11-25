@@ -1,0 +1,10 @@
+/.idea
+/node_modules
+/client-dist
+/.env
+
+/client/node_modules
+/client/dist
+
+/server/node_modules
+
