@@ -1,1 +1,1 @@
-export type SortOrder = 'asc' | 'desc';
+export type AffiliationType = 'HIGH' | 'MIDDLE' | 'LOW';

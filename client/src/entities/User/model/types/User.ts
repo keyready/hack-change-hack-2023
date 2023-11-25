@@ -8,4 +8,6 @@ export interface User {
     password: string;
 
     creditShortInfo: CreditShort;
+
+    affiliation: 'LOW' | 'MEDIUM' | 'HIGH';
 }

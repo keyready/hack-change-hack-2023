@@ -12,6 +12,8 @@ app.use(
 );
 app.use(express.json());
 
+const clients = {};
+
 const broadcastMessaging = (message) => {
     aWss.clients.forEach((client) => {
         client.send(message);
@@ -39,19 +41,42 @@ const sendMessage = async (messages) => {
     return jsonAnswer.choices[0].message.content;
 };
 
-app.post('/api/login', (req, res) => {
-    const { password } = req.body;
+app.post('/api/underwriter_login', (req, res) => {
+    const { password, email } = req.body;
 
     if (password === '123') {
         return res.status(200).json({
-            jwtToken: 'test',
-            userRole: 'ADMIN',
+            id: 1,
+            name: 'Корчак Р.Д.',
+            email,
+            affiliation: 'HIGH',
+            jwt: 'test-jwt-for-underwriter',
         });
     }
 
     return res.status(403).json({
         message: 'Неверный пароль',
     });
+});
+
+app.post('/api/borrower_register', (req, res) => {
+    const { password, email } = req.body;
+    const ip = req.connection.remoteAddress;
+
+    setTimeout(() => {
+        if (clients[ip]) {
+            clients[ip].send(
+                JSON.stringify({
+                    type: 'message',
+                    sender: 'bot',
+                    body: `<h3>Отлично! Почта успешно подтверждена!</h3>`,
+                }),
+            );
+        }
+        return res.status(200).json({
+            jwt: 'ghbdtn vbh',
+        });
+    }, 1000);
 });
 
 app.get('/api/suggestion_card', async (req, res) =>
@@ -66,40 +91,31 @@ app.get('/api/suggestion_card', async (req, res) =>
 
 app.ws('/ws/giga_chat', async (ws, req) => {
     console.log('connected');
+    const ip = req.connection.remoteAddress;
+    clients[ip] = ws;
+
     ws.on('message', async (event) => {
         const message = JSON.parse(event);
 
         switch (message.type) {
-            case 'connection':
-                broadcastMessaging(
-                    JSON.stringify({
-                        room: message.room,
-                        username: 'system',
-                        type: 'connection',
-                        message: `Пользователь ${message.username} подключился`,
-                        createdAt: new Date(),
-                    }),
-                );
-                break;
-
             case 'message':
-                const prompt =
-                    `вот массив шаблонных фраз: ` +
-                    `['причины отказа', 'какие ограничения', ` +
-                    `'статус заявки', 'документы', 'время обработки заявки'].` +
-                    `Твоя задача определять мое сообщение к какой-то из этих фраз. ` +
-                    `В ответ на все следующие мои сообщения тебе надо ответить ` +
-                    `шаблонной фразой, которая больше всего подходит по смыслу к тому,` +
-                    `что написал я. ` +
-                    `Мое сообщение: ${message.body}`;
-
-                const answer = await sendMessage([{ role: 'user', content: prompt }]);
+                if (message.body === 'рега') {
+                    console.log('начал регистрацию');
+                    ws.send(
+                        JSON.stringify({
+                            type: 'register_start',
+                            sender: 'bot',
+                            body: `<h3>${message.body}</h3>`,
+                        }),
+                    );
+                    return;
+                }
 
                 ws.send(
                     JSON.stringify({
                         type: 'message',
                         sender: 'bot',
-                        body: `<h3>${answer}</h3>`,
+                        body: `<h3>${message.body}</h3>`,
                     }),
                 );
                 break;

@@ -16,3 +16,17 @@
     max-width: 60%;
     text-align: left;
 }
+
+.leftSkeleton {
+    align-self: start;
+}
+
+.rightSkeleton {
+    align-self: end;
+    width: 50% !important;
+}
+
+.tallSkeleton {
+    width: 60% !important;
+    height: 80px !important;
+}

@@ -3,8 +3,9 @@ import { memo, useCallback, useEffect, useState } from 'react';
 import { VStack } from 'shared/UI/Stack';
 import { Message } from 'entities/Message';
 import useWebSocket from 'react-use-websocket';
-import { User } from 'entities/User';
+import { getUserData, User } from 'entities/User';
 import { useBorrowerChat } from 'features/UserChat/api/fetchUserDialogApi';
+import { useSelector } from 'react-redux';
 import { UserChatDialogArea } from '../UserChatDialogArea/UserChatDialogArea';
 import { UserChatHeader } from '../UserChatHeader/UserChatHeader';
 import { UserChatMessageArea } from '../UserChatMessageArea/UserChatMessageArea';
@@ -18,9 +19,11 @@ interface UserChatProps {
 export const UserChat = memo((props: UserChatProps) => {
     const { className, user } = props;
 
+    const userId = useSelector(getUserData)?.id;
+
     const { lastMessage, sendMessage } = useWebSocket('ws://localhost:5000/ws/user_chat');
 
-    const { data: userMessages, isLoading: isUserMessagesLoading } = useBorrowerChat(
+    const { data: userMessages, isFetching: isUserMessagesLoading } = useBorrowerChat(
         user?.id || -1,
     );
 
@@ -34,12 +37,13 @@ export const UserChat = memo((props: UserChatProps) => {
             JSON.stringify({
                 type: 'message',
                 body: message,
-                userId: user?.id || -1,
+                receiverId: user?.id || -1,
+                senderId: userId,
                 sender: 'user',
             }),
         );
         setMessages((prevState) => [...prevState, { body: message, sender: 'user' }]);
-    }, [message, sendMessage, user]);
+    }, [message, sendMessage, user?.id, userId]);
 
     useEffect(() => {
         if (lastMessage?.data) {
@@ -66,7 +70,7 @@ export const UserChat = memo((props: UserChatProps) => {
                 onAccept={handleAcceptRequest}
                 onReject={handleRejectRequest}
             />
-            <UserChatDialogArea messages={messages} />
+            <UserChatDialogArea isLoading={isUserMessagesLoading} messages={messages} />
             <UserChatMessageArea
                 onMessageSent={handleSendMessage}
                 value={message}
